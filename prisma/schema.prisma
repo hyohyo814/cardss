@@ -16,3 +16,31 @@ model Example {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
+
+model User {
+    id        String    @id @default(cuid())
+    watchList Product[]
+}
+
+model Series {
+    id        String    @id @default(cuid())
+    title     String
+    url       String
+    products  Product[]
+}
+
+model Product {
+    id        String   @id @default(cuid())
+    series    Series   @relation(fields: [seriesId], references: [id])
+    seriesId  String
+    name      String
+    price     String
+    image     String
+    savedBy   User?   @relation(fields: [savedById], references: [id])
+    savedById String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([seriesId])
+    @@index([savedById])
+}
