@@ -8,6 +8,29 @@ body {
   overscroll-behavior: none;
 }
 
+/* scrollbar width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* scrollbar track and thumb*/
+::-webkit-scrollbar-track {
+  background-color: gray;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: blue;
+}
+
+/* scrollbar hover states */
+::-webkit-scrollbar-track:hover {
+  background-color: black;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: red;
+}
+
 @layer utilities {
   @variants responsive {
     /* Hide scrollbar for Chrome, Safari and Opera */

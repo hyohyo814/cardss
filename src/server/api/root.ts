@@ -1,4 +1,5 @@
 import { seriesRouter } from "~/server/api/routers/series";
+import { productsRouter } from "./routers/products";
 import { createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -8,6 +9,7 @@ import { createTRPCRouter } from "~/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   series: seriesRouter,
+  products: productsRouter,
 });
 
 // export type definition of API
