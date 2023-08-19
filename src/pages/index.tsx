@@ -90,19 +90,20 @@ const Home: NextPage = () => {
         <div className="flex items-end px-6 py-2 text-4xl font-semibold">
           <span>CARDSS</span>
         </div>
-        <div id="user" className="flex p-4">
+        <div id="user" className="flex md:p-4">
           {!isSignedIn && <SignInButton />}
           {!!isSignedIn && <SignOutButton />}
           {!!isSignedIn && <Image
             src={user.imageUrl}
             alt={`${user?.username}'s profile picture`}
-            width={64}
-            height={64}
-            className="rounded-full mx-6"
+            width={128}
+            height={128}
+            className="rounded-full h-10 w-10 md:h-14 md:w-14
+            my-2 mx-5 md:mx-6 border border-gray-300"
           />}
         </div>
       </div>
-      <div id="container" className="mx-6 flex h-screen bg-black">
+      <div id="container" className="mx-6 md:mx-24 flex h-screen bg-black">
         <div
           id="selections-container"
           className="relative flex h-1/2 w-full
@@ -117,15 +118,15 @@ const Home: NextPage = () => {
             border-b border-gray-600 "
           >
           </label>
-            <div className="absolute z-30 -left-40
-            peer-checked:translate-x-40 transition
+            <div className="absolute z-30 -left-60
+            peer-checked:translate-x-60 transition
             pt-3 md:peer-hover:animate-pulse
             md:peer-hover:text-shadow-lg
             shadow-white">
               <span>COLLAPSE</span>
             </div>
             <div className="absolute z-30 right-0
-            peer-checked:translate-x-40 transition
+            peer-checked:translate-x-60 transition
             pt-3 md:peer-hover:animate-pulse
             md:peer-hover:text-shadow-lg
             shadow-white">
