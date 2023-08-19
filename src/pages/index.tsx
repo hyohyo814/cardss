@@ -18,7 +18,7 @@ function SeriesOptions({
   return (
     <>
       {seriesData.map((res) => (
-        <div key={res.id} className="flex p-1 font-semibold">
+        <div key={res.id} className="flex p-1 font-light">
           <input
             className="peer hidden"
             id={res.id}
@@ -29,7 +29,8 @@ function SeriesOptions({
           />
           <label
             className="break-word w-full peer-checked:bg-slate-900
-                    md:hover:cursor-pointer md:hover:bg-slate-300"
+                    md:hover:cursor-pointer md:hover:bg-slate-300
+                    border-b border-gray-700"
             htmlFor={res.id}
           >
             {res.title}
@@ -44,7 +45,7 @@ function ProductsOptions({ productsData }: { productsData: Product[] }) {
   return (
     <>
       {productsData.map((res) => (
-        <div key={res.id} className="flex p-1">
+        <div key={res.id} className="flex p-1 font-extralight">
           <input
             className="peer hidden"
             id={res.id}
@@ -78,48 +79,67 @@ const Home: NextPage = () => {
   return (
     <PageLayout>
       <div
-        className="sticky top-0 z-50 flex h-14 items-center
-        justify-end border-b border-gray-800 bg-black md:h-24"
+        className="sticky top-0 z-50 flex h-14
+        justify-between border-b border-gray-800 bg-black md:h-24"
       >
-        <div id="user" className="p-4">
+        <div className="flex items-end p-2 text-4xl font-semibold">CARDSS</div>
+        <div id="user" className="flex p-4">
           {!isSignedIn && <SignInButton />}
           {!!isSignedIn && <SignOutButton />}
         </div>
       </div>
-      <div id="container" className="mx-6 flex h-screen bg-gray-500">
-        <div id="selections-container" className="relative flex h-1/2 w-full
-        flex-wrap">
+      <div id="container" className="mx-6 flex h-screen bg-black">
+        <div
+          id="selections-container"
+          className="relative flex h-1/2 w-full
+        flex-wrap"
+        >
           <input id="selections-btn" type="checkbox" className="peer hidden" />
-          <label htmlFor="selections-btn" className="flex w-full h-[50px]
-          justify-center z-40 bg-black">
-            BUTTON
+          <label
+            htmlFor="selections-btn"
+            className="z-40 flex h-[50px]
+          w-full justify-center bg-black pt-3 md:hover:cursor-pointer"
+          >
+            ADD A PRODUCT
           </label>
 
-          <div id="selections" className="flex absolute top-[-340px] z-30 w-full
-          peer-checked:translate-y-[390px] transition ease-in-out">
-            <div className="flex h-96 w-1/2 flex-col overflow-y-scroll bg-red-400">
-              <legend className="z-25 sticky top-0 flex bg-black font-semibold">
+          <div
+            id="selections"
+            className="absolute top-[-340px] z-30 flex w-full
+          transition ease-in-out peer-checked:translate-y-[390px]"
+          >
+            <div
+              className="flex h-96 w-1/2 flex-col
+            bg-gray-800"
+            >
+              <legend className="z-25 flex bg-black font-semibold">
                 Titles
               </legend>
-              {!!seriesLoading && <LoadingSpinner />}
-              {!seriesData && <div>NO DATA</div>}
-              {seriesData && (
-                <SeriesOptions
-                  seriesData={seriesData}
-                  setSelectedSeries={setSelectedSeries}
-                />
-              )}
+              <div className="overflow-y-scroll">
+                {!!seriesLoading && <LoadingSpinner />}
+                {!seriesData && <div>NO DATA</div>}
+                {seriesData && (
+                  <SeriesOptions
+                    seriesData={seriesData}
+                    setSelectedSeries={setSelectedSeries}
+                  />
+                )}
+              </div>
             </div>
-            <div className="flex h-96 w-1/2 flex-col overflow-y-scroll bg-red-400">
-              <legend className="z-25 sticky top-0 flex bg-black font-semibold">
+            <div className="flex h-96 w-1/2 flex-col  bg-gray-800">
+              <legend className="z-25 flex bg-black font-semibold">
                 Products
               </legend>
-              {!!productsLoading && (
-                <div className="">
-                  <LoadingSpinner />
-                </div>
-              )}
-              {productsData && <ProductsOptions productsData={productsData} />}
+              <div className="overflow-y-scroll">
+                {!!productsLoading && (
+                  <div className="">
+                    <LoadingSpinner />
+                  </div>
+                )}
+                {productsData && (
+                  <ProductsOptions productsData={productsData} />
+                )}
+              </div>
             </div>
           </div>
         </div>
