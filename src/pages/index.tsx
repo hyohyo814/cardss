@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 import { type NextPage } from "next";
 import React, { PropsWithChildren, useState } from "react";
 import { PageLayout } from "~/components/layout";
@@ -45,7 +46,7 @@ function ProductsOptions({ productsData }: { productsData: Product[] }) {
   return (
     <>
       {productsData.map((res) => (
-        <div key={res.id} className="flex p-1 font-extralight">
+        <div key={res.id} className="flex font-extralight">
           <input
             className="peer hidden"
             id={res.id}
@@ -67,6 +68,7 @@ function ProductsOptions({ productsData }: { productsData: Product[] }) {
   );
 }
 
+
 const Home: NextPage = () => {
   const [selectedSeries, setSelectedSeries] = useState("");
   const { user, isSignedIn, isLoaded: userLoaded } = useUser();
@@ -76,6 +78,8 @@ const Home: NextPage = () => {
     api.products.getFromSeries.useQuery({ seriesId: selectedSeries });
 
   if (!userLoaded) return <LoadingPage />;
+
+  console.log(user?.imageUrl);
 
   return (
     <PageLayout>
@@ -89,6 +93,13 @@ const Home: NextPage = () => {
         <div id="user" className="flex p-4">
           {!isSignedIn && <SignInButton />}
           {!!isSignedIn && <SignOutButton />}
+          {!!isSignedIn && <Image
+            src={user.imageUrl}
+            alt={`${user?.username}'s profile picture`}
+            width={64}
+            height={64}
+            className="rounded-full mx-6"
+          />}
         </div>
       </div>
       <div id="container" className="mx-6 flex h-screen bg-black">
@@ -110,12 +121,16 @@ const Home: NextPage = () => {
             peer-checked:translate-x-40 transition
             pt-3 md:peer-hover:animate-pulse
             md:peer-hover:text-shadow-lg
-            shadow-white">COLLAPSE</div>
+            shadow-white">
+              <span>COLLAPSE</span>
+            </div>
             <div className="absolute z-30 right-0
             peer-checked:translate-x-40 transition
             pt-3 md:peer-hover:animate-pulse
             md:peer-hover:text-shadow-lg
-            shadow-white">ADD A PRODUCT</div>
+            shadow-white">
+              <span>ADD A PRODUCT</span>
+            </div>
           
           <div
             id="selections"
@@ -126,7 +141,7 @@ const Home: NextPage = () => {
               className="flex h-96 w-1/2 flex-col
             bg-gray-800"
             >
-              <legend className="flex bg-black font-semibold">
+              <legend className="flex bg-black font-semibold text-xl">
                 Titles
               </legend>
               <div className="overflow-y-scroll h-full">
@@ -143,7 +158,7 @@ const Home: NextPage = () => {
               </div>
             </div>
             <div className="flex h-96 w-1/2 flex-col  bg-gray-800">
-              <legend className="flex bg-black font-semibold">
+              <legend className="flex bg-black font-semibold text-xl">
                 <span>Products</span>
               </legend>
               <div className="overflow-y-scroll">
