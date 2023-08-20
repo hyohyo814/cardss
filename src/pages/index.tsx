@@ -29,9 +29,9 @@ function SeriesOptions({
             onChange={(e) => setSelectedSeries(e.target.value)}
           />
           <label
-            className="break-word w-full peer-checked:bg-slate-300
-            md:hover:cursor-pointer md:hover:bg-slate-200 peer-checked:text-black
-            border-b md:hover:text-black border-gray-700 p-1"
+            className="break-word w-full border-b
+            border-gray-700 p-1 peer-checked:bg-slate-300
+            peer-checked:text-black md:hover:cursor-pointer md:hover:bg-slate-200 md:hover:text-black"
             htmlFor={res.id}
           >
             <span>{res.title}</span>
@@ -55,9 +55,10 @@ function ProductsOptions({ productsData }: { productsData: Product[] }) {
             value={res.id}
           />
           <label
-            className="break-word w-full peer-checked:bg-slate-300
-            md:hover:cursor-pointer md:hover:bg-slate-200 peer-checked:text-black
-            border-b md:hover:text-black border-gray-700 p-1"
+            className="break-word w-full border-b
+            border-gray-700 p-1
+            peer-checked:bg-slate-300 peer-checked:text-black md:hover:cursor-pointer
+            md:hover:bg-slate-200 md:hover:text-black"
             htmlFor={res.id}
           >
             {res.name}
@@ -68,7 +69,6 @@ function ProductsOptions({ productsData }: { productsData: Product[] }) {
   );
 }
 
-
 const Home: NextPage = () => {
   const [selectedSeries, setSelectedSeries] = useState("");
   const { user, isSignedIn, isLoaded: userLoaded } = useUser();
@@ -76,10 +76,12 @@ const Home: NextPage = () => {
     api.series.getAll.useQuery();
   const { data: productsData, isLoading: productsLoading } =
     api.products.getFromSeries.useQuery({ seriesId: selectedSeries });
+  const { data: userWatchlist } =
+    api.users.getUserList.useQuery();
 
   if (!userLoaded) return <LoadingPage />;
 
-  console.log(user?.imageUrl);
+  console.log(userWatchlist);
 
   return (
     <PageLayout>
@@ -93,17 +95,20 @@ const Home: NextPage = () => {
         <div id="user" className="flex md:p-4">
           {!isSignedIn && <SignInButton />}
           {!!isSignedIn && <SignOutButton />}
-          {!!isSignedIn && <Image
-            src={user.imageUrl}
-            alt={`${user?.username}'s profile picture`}
-            width={128}
-            height={128}
-            className="rounded-full h-10 w-10 md:h-14 md:w-14
-            my-2 mx-5 md:mx-6 border border-gray-300"
-          />}
+          {!!isSignedIn && (
+            <Image
+              src={user.imageUrl}
+              alt={`${user?.username}'s profile picture`}
+              width={128}
+              height={128}
+              className="mx-5 my-2 h-10 w-10 rounded-full
+            border border-gray-300 md:mx-6 md:h-14 md:w-14"
+            />
+          )}
         </div>
       </div>
-      <div id="container" className="mx-6 md:mx-24 flex h-screen bg-black">
+      <div id="container" className="mx-6 flex h-screen bg-black md:mx-24
+      flex-wrap">
         <div
           id="selections-container"
           className="relative flex h-1/2 w-full
@@ -114,25 +119,28 @@ const Home: NextPage = () => {
           <label
             htmlFor="selections-btn"
             className="relative z-40 flex h-[50px]
-            w-full justify-center pt-3 md:hover:cursor-pointer
-            border-b border-gray-600 "
+            w-full justify-center border-b border-gray-600
+            pt-3 md:hover:cursor-pointer "
+          ></label>
+          <div
+            className="absolute -left-60 z-30
+            pt-3 shadow-white
+            transition peer-checked:translate-x-60
+            md:peer-hover:animate-pulse
+            md:peer-hover:text-shadow-lg"
           >
-          </label>
-            <div className="absolute z-30 -left-60
-            peer-checked:translate-x-60 transition
-            pt-3 md:peer-hover:animate-pulse
-            md:peer-hover:text-shadow-lg
-            shadow-white">
-              <span>COLLAPSE</span>
-            </div>
-            <div className="absolute z-30 right-0
-            peer-checked:translate-x-60 transition
-            pt-3 md:peer-hover:animate-pulse
-            md:peer-hover:text-shadow-lg
-            shadow-white">
-              <span>ADD A PRODUCT</span>
-            </div>
-          
+            <span>COLLAPSE</span>
+          </div>
+          <div
+            className="absolute right-0 z-30
+            pt-3 shadow-white
+            transition peer-checked:translate-x-60
+            md:peer-hover:animate-pulse
+            md:peer-hover:text-shadow-lg"
+          >
+            <span>ADD A PRODUCT</span>
+          </div>
+
           <div
             id="selections"
             className="absolute top-[-340px] z-10 flex w-full
@@ -142,14 +150,16 @@ const Home: NextPage = () => {
               className="flex h-96 w-1/2 flex-col
             bg-gray-800"
             >
-              <legend className="flex bg-black font-semibold text-xl">
+              <legend className="flex bg-black text-xl font-semibold">
                 Titles
               </legend>
-              <div className="overflow-y-scroll h-full">
-                {!seriesData || !!seriesLoading &&
-                  <div className="flex pt-[24px] justify-center items-center">
-                    <LoadingSpinner size={36} />
-                  </div>}
+              <div className="h-full overflow-y-scroll">
+                {!seriesData ||
+                  (!!seriesLoading && (
+                    <div className="flex items-center justify-center pt-[24px]">
+                      <LoadingSpinner size={36} />
+                    </div>
+                  ))}
                 {seriesData && (
                   <SeriesOptions
                     seriesData={seriesData}
@@ -159,12 +169,12 @@ const Home: NextPage = () => {
               </div>
             </div>
             <div className="flex h-96 w-1/2 flex-col  bg-gray-800">
-              <legend className="flex bg-black font-semibold text-xl">
+              <legend className="flex bg-black text-xl font-semibold">
                 <span>Products</span>
               </legend>
               <div className="overflow-y-scroll">
                 {!!productsLoading && (
-                  <div className="flex pt-[24px] justify-center items-center">
+                  <div className="flex items-center justify-center pt-[24px]">
                     <LoadingSpinner size={36} />
                   </div>
                 )}
@@ -174,6 +184,9 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="flex h-1/2 w-full bg-red-500">
+
         </div>
       </div>
     </PageLayout>
