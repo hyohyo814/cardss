@@ -21,6 +21,8 @@ const config = {
     remotePatterns: [
       {
         hostname: 'img.clerk.com',
+      },{
+        hostname: 'www.novatcg.com',
       },
     ],
   },

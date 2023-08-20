@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import {
   createTRPCRouter,
@@ -14,19 +15,10 @@ export const usersRouter = createTRPCRouter({
     const { userId } = ctx;
     return await ctx.prisma.user.findUnique({
       where: {
-        id: userId,
+        userId: userId,
       },
       include: {
         watchList: true,
-      },
-    });
-  }),
-
-  addUser: privateProcedure.mutation(async ({ ctx }) => {
-    const { userId } = ctx;
-    return await ctx.prisma.user.create({
-      data: {
-        userId: userId,
       },
     });
   }),
@@ -36,6 +28,20 @@ export const usersRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const { userId } = ctx;
       const { productId } = input;
+      const userExist = await ctx.prisma.user.findFirst({
+        where: {
+          userId: userId,
+        },
+      });
+
+      if (!userExist) {
+        await ctx.prisma.user.create({
+          data: {
+            userId: userId,
+          },
+        });
+      };
+
       return await ctx.prisma.user.update({
         where: {
           userId: userId,
@@ -55,6 +61,16 @@ export const usersRouter = createTRPCRouter({
   .mutation(async ({ ctx, input }) => {
     const { userId } = ctx;
     const { productId } = input;
+    const useExists = await ctx.prisma.user.findFirst({
+      where: {
+        userId: userId,
+      },
+    });
+
+    if (!userExist) {
+      throw new TRPCError({ code: 'UNAUTHORIZED' });
+    };
+
     return await ctx.prisma.user.update({
       where: {
         userId: userId,

@@ -49,7 +49,7 @@ function ProductsOptions({ productsData }: { productsData: Product[] }) {
   const ctx = api.useContext();
   const { mutate } = api.users.saveProduct.useMutation({
     onSuccess: () => {
-      void ctx.products.getAll.invalidate();
+      void ctx.users.getUserList.invalidate();
     },
     onError: (e) => {
       const errorMessage = e.data?.zodError?.fieldErrors.content;
@@ -60,7 +60,7 @@ function ProductsOptions({ productsData }: { productsData: Product[] }) {
       }
     },
   });
-  
+ 
   function handler(e: React.SyntheticEvent) {
     e.preventDefault();
     if (!e.target) {
@@ -71,7 +71,6 @@ function ProductsOptions({ productsData }: { productsData: Product[] }) {
     if (userData) {
       mutate({ productId: value });
     }  
-
   }
 
   return (
@@ -113,7 +112,7 @@ const Home: NextPage = () => {
 
   if (!userLoaded) return <LoadingPage />;
 
-  console.log(userWatchlist);
+  const watchList = userWatchlist?.watchList;
 
   return (
     <PageLayout>
@@ -217,8 +216,21 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-        <div className="flex h-1/2 w-full bg-red-500">
-
+        <div className="flex flex-wrap h-1/2 w-full bg-red-500">
+          {!!watchListLoading && <LoadingSpinner />}
+          {!!watchList && watchList.map(item => (
+            <div className="flex-wrap md:w-1/5">
+              <Image
+                src={item.image}
+                height={365}
+                width={262}
+                alt={`${item.name} image`}
+                className="rounded-xl"
+              />
+              <span>{item.name}</span>
+              <span>{item.price}</span>
+            </div>
+          ))} 
         </div>
       </div>
     </PageLayout>
