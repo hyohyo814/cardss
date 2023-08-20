@@ -22,7 +22,7 @@ export const usersRouter = createTRPCRouter({
     });
   }),
 
-  addUser: privateProcedure.query(async ({ ctx }) => {
+  addUser: privateProcedure.mutation(async ({ ctx }) => {
     const { userId } = ctx;
     return await ctx.prisma.user.create({
       data: {
@@ -33,7 +33,7 @@ export const usersRouter = createTRPCRouter({
 
   saveProduct: privateProcedure
     .input(z.object({ productId: z.string() }))
-    .query(async ({ ctx, input }) => {
+    .mutation(async ({ ctx, input }) => {
       const { userId } = ctx;
       const { productId } = input;
       return await ctx.prisma.user.update({
@@ -52,7 +52,7 @@ export const usersRouter = createTRPCRouter({
   
   removeProduct: privateProcedure
   .input(z.object({ productId: z.string() }))
-  .query(async ({ ctx, input }) => {
+  .mutation(async ({ ctx, input }) => {
     const { userId } = ctx;
     const { productId } = input;
     return await ctx.prisma.user.update({
@@ -68,4 +68,6 @@ export const usersRouter = createTRPCRouter({
       },
     });
   }),
+
+  
 });

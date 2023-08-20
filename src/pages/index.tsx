@@ -43,6 +43,37 @@ function SeriesOptions({
 }
 
 function ProductsOptions({ productsData }: { productsData: Product[] }) {
+  const [productId, setProductId] = useState('');
+  const { user } = useUser();
+  const { data: userData, isLoading: userLoading } = api.users.getUserList.useQuery();
+  const ctx = api.useContext();
+  const { mutate } = api.users.saveProduct.useMutation({
+    onSuccess: () => {
+      void ctx.products.getAll.invalidate();
+    },
+    onError: (e) => {
+      const errorMessage = e.data?.zodError?.fieldErrors.content;
+      if (errorMessage?.[0]) {
+        console.error(errorMessage[0]!)
+      } else {
+        console.error('Failed to add! Please try again later');
+      }
+    },
+  });
+  
+  function handler(e: React.SyntheticEvent) {
+    e.preventDefault();
+    if (!e.target) {
+      console.error('ProductOptions()@index.tsx: id missing from product');
+    }
+    const target = e.target as HTMLInputElement;
+    const { value } = target; 
+    if (userData) {
+      mutate({ productId: value });
+    }  
+
+  }
+
   return (
     <>
       {productsData.map((res) => (
@@ -53,6 +84,7 @@ function ProductsOptions({ productsData }: { productsData: Product[] }) {
             name="product"
             type="radio"
             value={res.id}
+            onClick={handler}
           />
           <label
             className="break-word w-full border-b
@@ -76,7 +108,7 @@ const Home: NextPage = () => {
     api.series.getAll.useQuery();
   const { data: productsData, isLoading: productsLoading } =
     api.products.getFromSeries.useQuery({ seriesId: selectedSeries });
-  const { data: userWatchlist } =
+  const { data: userWatchlist, isLoading: watchListLoading } =
     api.users.getUserList.useQuery();
 
   if (!userLoaded) return <LoadingPage />;
