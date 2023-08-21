@@ -19,5 +19,18 @@ export const productsRouter = createTRPCRouter({
         }
       })
     }),
-
+  
+  getPopular: publicProcedure.query(async ({ ctx }) => {
+    return await ctx.prisma.product.findMany({
+      take: 5,
+      include: {
+        savedBy: true
+      },
+      orderBy: {
+        savedBy: {
+          _count: 'desc'
+        }
+      }
+    });
+  })
 });
