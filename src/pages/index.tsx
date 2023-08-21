@@ -130,6 +130,57 @@ function AnimateDropdown() {
   )
 }
 
+function DropdownSelections() {
+  const [selectedSeries, setSelectedSeries] = useState("");
+  const { data: seriesData, isLoading: seriesLoading } =
+    api.series.getAll.useQuery();
+  const { data: productsData, isLoading: productsLoading } =
+    api.products.getFromSeries.useQuery({ seriesId: selectedSeries });
+
+  return (
+    <div className="flex w-full">
+      <div
+       className="flex h-96 w-1/2 flex-col
+       bg-gray-800"
+      >
+        <legend className="flex bg-black text-xl font-semibold">
+          Titles
+        </legend>
+        <div className="h-full overflow-y-scroll">
+          {!seriesData ||
+            (!!seriesLoading && (
+              <div className="flex items-center justify-center pt-[24px]">
+                <LoadingSpinner size={36} />
+              </div>
+          ))}
+          {seriesData && (
+            <SeriesOptions
+              seriesData={seriesData}
+              setSelectedSeries={setSelectedSeries}
+            />
+          )}
+        </div>
+      </div>
+      <div className="flex h-96 w-1/2 flex-col z-20 bg-gray-800">
+        <legend className="flex bg-black text-xl font-semibold">
+          <span>Products</span>
+        </legend>
+        <div className="overflow-y-scroll">
+          {!!productsLoading && (
+            <div className="flex items-center justify-center pt-[24px]">
+              <LoadingSpinner size={36} />
+            </div>
+          )}
+          {productsData && (
+            <ProductsOptions productsData={productsData} />
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+
 const Home: NextPage = () => {
   const [selectedSeries, setSelectedSeries] = useState("");
   const { user, isSignedIn, isLoaded: userLoaded } = useUser();
@@ -201,43 +252,7 @@ const Home: NextPage = () => {
            className="absolute top-[-340px] z-10 flex w-full
            transition ease-in-out peer-checked/selections-btn:translate-y-[390px]"
           >
-            <div
-             className="flex h-96 w-1/2 flex-col
-             bg-gray-800"
-            >
-              <legend className="flex bg-black text-xl font-semibold">
-                Titles
-              </legend>
-              <div className="h-full overflow-y-scroll">
-                {!seriesData ||
-                  (!!seriesLoading && (
-                    <div className="flex items-center justify-center pt-[24px]">
-                      <LoadingSpinner size={36} />
-                    </div>
-                ))}
-                {seriesData && (
-                  <SeriesOptions
-                    seriesData={seriesData}
-                    setSelectedSeries={setSelectedSeries}
-                  />
-                )}
-              </div>
-            </div>
-            <div className="flex h-96 w-1/2 flex-col z-20 bg-gray-800">
-              <legend className="flex bg-black text-xl font-semibold">
-                <span>Products</span>
-              </legend>
-              <div className="overflow-y-scroll">
-                {!!productsLoading && (
-                  <div className="flex items-center justify-center pt-[24px]">
-                    <LoadingSpinner size={36} />
-                  </div>
-                )}
-                {productsData && (
-                  <ProductsOptions productsData={productsData} />
-                )}
-              </div>
-            </div>
+            <DropdownSelections />
           </div>
           <div className="absolute top-16 z-10 w-full bg-black
            peer-checked/selections-btn:translate-y-[480px] transition
@@ -246,23 +261,30 @@ const Home: NextPage = () => {
               p-2 mb-6 md:h-16">
               <span>Most Popular</span>
             </h2>
-            <div className="flex flex-wrap overflow-y-auto h-96 md:h-full justify-center">
+            <div className="flex flex-wrap overflow-y-auto md:overflow-hidden h-96 md:h-full justify-center">
               {!!popProdLoading && (
                 <div className="flex w-full justify-center">
                   <LoadingSpinner size={66}/>
                 </div>
               )}
               {!!popularProducts && popularProducts.map(item => (
-                <div className="flex flex-wrap md:w-48 md:h-96 p-2 justify-center
-                  w-40 h-96"
+                <div className="flex relative flex-wrap md:w-48 md:h-96 p-2 justify-center
+                  w-40 h-96 group"
                   key={item.id}
                 >
+                  <input type="checkbox" name="mobileTouch" id={item.id} className="hidden absolute peer z-30" />
+                  <label htmlFor={item.id} className="absolute md:hidden w-full h-full z-30" />
+                  <div className="absolute flex invisible flex-col w-full h-full pt-12 items-center z-20
+                   md:group-hover:visible transition ease-in-out peer-checked:visible">
+                    <button className="bg-gray-800 w-24 h-10 rounded-full my-2">Go to link</button>
+                  </div>
                   <Image
                     src={item.image}
                     height={365}
                     width={262}
                     alt={`${item.name} image`}
-                    className="rounded-xl md:w-[180px] md:h-[251px]"
+                    className="rounded-xl md:w-[180px] md:h-[251px]
+                    md:group-hover:blur z-10 transition peer-checked:blur" 
                   />
                   <div className="flex h-20 font-thin">
                     <span>{item.name}</span>
@@ -288,11 +310,11 @@ const Home: NextPage = () => {
               </div>
             )}
             {!!watchList && watchList.map(item => (
-              <div className="flex relative flex-wrap md:w-48 md:h-96 p-2 md:group
+              <div className="flex relative flex-wrap md:w-48 md:h-96 p-2 group
                 w-40 h-96"
                 key={item.id}
               >
-                <input type="checkbox" name="mobileTouch" id={item.id} className="absolute peer z-30" />
+                <input type="checkbox" name="mobileTouch" id={item.id} className="hidden absolute peer z-30" />
                 <label htmlFor={item.id} className="absolute md:hidden w-full h-full pr-4 z-30" />
                 <div className="absolute flex invisible flex-col w-full h-full pr-4 pt-6 items-center z-20
                  md:group-hover:visible transition ease-in-out peer-checked:visible">
