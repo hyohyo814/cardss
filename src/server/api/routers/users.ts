@@ -13,7 +13,7 @@ export const usersRouter = createTRPCRouter({
 
   getUserList: privateProcedure.query(async ({ ctx }) => {
     const { userId } = ctx;
-    return await ctx.prisma.user.findUnique({
+    return await ctx.prisma.user.findFirst({
       where: {
         userId: userId,
       },

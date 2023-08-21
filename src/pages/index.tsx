@@ -225,36 +225,38 @@ const Home: NextPage = () => {
             HELLO
           </div>
         </div>
-        <div className="flex flex-wrap z-20 w-full bg-black justify-between
+        <div className="flex flex-wrap z-20 w-full bg-black
         p-2 absolute top-[500px] h-1/2">
           <div className="flex w-full text-4xl font-thin border-b border-gray-50
           mb-6 p-2 md:h-16">
             <h2>Wishlist</h2>
           </div>
-          {!!watchListLoading && (
-            <div className="flex w-full justify-center">
-              <LoadingSpinner size={66}/>
-            </div>
-          )}
-          {!!watchList && watchList.map(item => (
-            <div className="flex flex-wrap md:w-48 md:h-96 m-2 justify-center"
-              key={item.id}
-            >
-              <Image
-                src={item.image}
-                height={365}
-                width={262}
-                alt={`${item.name} image`}
-                className="rounded-xl md:w-[180px] md:h-[251px]"
-              />
-              <div className="flex h-20">
-                <span>{item.name}</span>
+          <div className="items-start flex-wrap flex justify-between">
+            {!!watchListLoading && (
+              <div className="flex w-full justify-center">
+                <LoadingSpinner size={66}/>
               </div>
-              <div>
-                <span>{item.price}</span>
+            )}
+            {!!watchList && watchList.map(item => (
+              <div className="flex flex-wrap md:w-48 md:h-96 m-2 justify-center"
+                key={item.id}
+              >
+                <Image
+                  src={item.image}
+                  height={365}
+                  width={262}
+                  alt={`${item.name} image`}
+                  className="rounded-xl md:w-[180px] md:h-[251px]"
+                />
+                <div className="flex h-20">
+                  <span>{item.name}</span>
+                </div>
+                <div>
+                  <span>{item.price}</span>
+                </div>
               </div>
-            </div>
-          ))} 
+            ))}
+          </div>
         </div>
       </div>
     </PageLayout>
