@@ -240,7 +240,9 @@ const Home: NextPage = () => {
             </div>
           )}
           {!!watchList && watchList.map(item => (
-            <div className="flex flex-wrap md:w-48 md:h-96 m-2 justify-center">
+            <div className="flex flex-wrap md:w-48 md:h-96 m-2 justify-center"
+              key={item.id}
+            >
               <Image
                 src={item.image}
                 height={365}
