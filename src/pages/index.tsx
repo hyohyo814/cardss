@@ -100,6 +100,39 @@ function ProductsOptions({ productsData }: { productsData: Product[] }) {
   );
 }
 
+function AnimateDropdown() {
+  return (
+    <>   
+    <div className="absolute z-30 h-[50px] w-full bg-black" />
+    <input id="selections-btn" type="checkbox" className="peer/selections-btn hidden" />
+      <label
+       htmlFor="selections-btn"
+       className="relative z-40 flex h-[50px]
+       w-full justify-center border-b border-gray-600
+       pt-3 md:hover:cursor-pointer "
+       ></label>
+      <div
+       className="absolute -left-60 z-30
+       pt-3 shadow-white
+       transition peer-checked/selections-btn:translate-x-60
+       md:peer-hover:animate-pulse
+       md:peer-hover:text-shadow-lg"
+      >
+        <span>COLLAPSE</span>
+      </div>
+      <div
+       className="absolute right-0 z-30
+       pt-3 shadow-white
+       transition peer-checked/selections-btn:translate-x-60
+       md:peer-hover:animate-pulse
+       md:peer-hover:text-shadow-lg"
+      >
+        <span>ADD A PRODUCT</span>
+    </div>
+    </>
+  )
+}
+
 const Home: NextPage = () => {
   const [selectedSeries, setSelectedSeries] = useState("");
   const { user, isSignedIn, isLoaded: userLoaded } = useUser();
@@ -141,45 +174,19 @@ const Home: NextPage = () => {
       <div id="container" className="mx-6 flex h-screen bg-black md:mx-24
       flex-wrap">
         <div
-          id="selections-container"
-          className="relative flex h-1/2 w-full
-        flex-wrap"
+         id="selections-container"
+         className="relative flex h-1/2 w-full
+         flex-wrap"
         >
-          <div className="absolute z-30 h-[50px] w-full bg-black" />
-          <input id="selections-btn" type="checkbox" className="peer hidden" />
-          <label
-            htmlFor="selections-btn"
-            className="relative z-40 flex h-[50px]
-            w-full justify-center border-b border-gray-600
-            pt-3 md:hover:cursor-pointer "
-          ></label>
+          <AnimateDropdown />
           <div
-            className="absolute -left-60 z-30
-            pt-3 shadow-white
-            transition peer-checked:translate-x-60
-            md:peer-hover:animate-pulse
-            md:peer-hover:text-shadow-lg"
-          >
-            <span>COLLAPSE</span>
-          </div>
-          <div
-            className="absolute right-0 z-30
-            pt-3 shadow-white
-            transition peer-checked:translate-x-60
-            md:peer-hover:animate-pulse
-            md:peer-hover:text-shadow-lg"
-          >
-            <span>ADD A PRODUCT</span>
-          </div>
-
-          <div
-            id="selections"
-            className="absolute top-[-340px] z-10 flex w-full
-          transition ease-in-out peer-checked:translate-y-[390px]"
+           id="selections"
+           className="absolute top-[-340px] z-10 flex w-full
+           transition ease-in-out peer-checked/selections-btn:translate-y-[390px]"
           >
             <div
-              className="flex h-96 w-1/2 flex-col
-            bg-gray-800"
+             className="flex h-96 w-1/2 flex-col
+             bg-gray-800"
             >
               <legend className="flex bg-black text-xl font-semibold">
                 Titles
@@ -190,7 +197,7 @@ const Home: NextPage = () => {
                     <div className="flex items-center justify-center pt-[24px]">
                       <LoadingSpinner size={36} />
                     </div>
-                  ))}
+                ))}
                 {seriesData && (
                   <SeriesOptions
                     seriesData={seriesData}
@@ -199,7 +206,7 @@ const Home: NextPage = () => {
                 )}
               </div>
             </div>
-            <div className="flex h-96 w-1/2 flex-col  bg-gray-800">
+            <div className="flex h-96 w-1/2 flex-col z-20 bg-gray-800">
               <legend className="flex bg-black text-xl font-semibold">
                 <span>Products</span>
               </legend>
@@ -215,20 +222,34 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
+          <div className="absolute top-16 z-10 h-3/4 w-full bg-red-500
+           peer-checked/selections-btn:translate-y-[480px] transition
+           ease-in-out">
+            HELLO
+          </div>
         </div>
-        <div className="flex flex-wrap h-1/2 w-full bg-red-500">
+        <div className="flex flex-wrap z-20 w-full bg-black justify-between
+        p-2">
+          <div className="flex w-full text-4xl font-thin border-b border-gray-50
+          mb-6 p-2">
+            <h2>Wishlist</h2>
+          </div>
           {!!watchListLoading && <LoadingSpinner />}
           {!!watchList && watchList.map(item => (
-            <div className="flex-wrap md:w-1/5">
+            <div className="flex flex-wrap md:w-48 md:h-96 m-2 justify-center">
               <Image
                 src={item.image}
                 height={365}
                 width={262}
                 alt={`${item.name} image`}
-                className="rounded-xl"
+                className="rounded-xl md:w-[180px] md:h-[251px]"
               />
-              <span>{item.name}</span>
-              <span>{item.price}</span>
+              <div className="flex h-20">
+                <span>{item.name}</span>
+              </div>
+              <div>
+                <span>{item.price}</span>
+              </div>
             </div>
           ))} 
         </div>
