@@ -172,7 +172,7 @@ const Home: NextPage = () => {
         </div>
       </div>
       <div id="container" className="mx-6 flex h-screen bg-black md:mx-24
-      flex-wrap">
+      flex-wrap relative">
         <div
          id="selections-container"
          className="relative flex h-1/2 w-full
@@ -229,12 +229,16 @@ const Home: NextPage = () => {
           </div>
         </div>
         <div className="flex flex-wrap z-20 w-full bg-black justify-between
-        p-2">
+        p-2 absolute top-[500px] h-1/2">
           <div className="flex w-full text-4xl font-thin border-b border-gray-50
-          mb-6 p-2">
+          mb-6 p-2 md:h-16">
             <h2>Wishlist</h2>
           </div>
-          {!!watchListLoading && <LoadingSpinner />}
+          {!!watchListLoading && (
+            <div className="flex w-full justify-center">
+              <LoadingSpinner size={66}/>
+            </div>
+          )}
           {!!watchList && watchList.map(item => (
             <div className="flex flex-wrap md:w-48 md:h-96 m-2 justify-center">
               <Image

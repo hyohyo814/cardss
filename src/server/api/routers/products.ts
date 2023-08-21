@@ -18,6 +18,18 @@ export const productsRouter = createTRPCRouter({
           seriesId: input.seriesId
         }
       })
-    })
+    }),
 
+  getPopular: publicProcedure.query(async ({ ctx}) => {
+    return await ctx.prisma.product.findMany({
+      orderBy: {
+        _count: {
+          
+        }
+      },
+      take: 3,
+    });
+  }),
+  
+  
 });
