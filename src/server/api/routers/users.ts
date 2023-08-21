@@ -61,13 +61,13 @@ export const usersRouter = createTRPCRouter({
   .mutation(async ({ ctx, input }) => {
     const { userId } = ctx;
     const { productId } = input;
-    const useExists = await ctx.prisma.user.findFirst({
+    const userExists = await ctx.prisma.user.findFirst({
       where: {
         userId: userId,
       },
     });
 
-    if (!userExist) {
+    if (!userExists) {
       throw new TRPCError({ code: 'UNAUTHORIZED' });
     };
 
