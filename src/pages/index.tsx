@@ -144,6 +144,22 @@ const Home: NextPage = () => {
 
   const watchList = userWatchlist?.watchList;
 
+  function checkDiscount(priceStr: string) {
+    if (/\s/.test(priceStr)) {
+      const wsIndex = priceStr.indexOf(" ");
+      const deprecatedPrice = priceStr.substring(0, wsIndex);
+      const newPrice = priceStr.substring(wsIndex);
+      return (
+        <>
+          <span className="line-through text-red-500">{deprecatedPrice}</span>
+          <span className="text-green-500">{newPrice}</span>
+        </>
+      )
+    }
+
+    return priceStr;
+  }
+
   return (
     <PageLayout>
       <div
@@ -231,14 +247,14 @@ const Home: NextPage = () => {
           mb-6 p-2 md:h-16">
             <h2>Wishlist</h2>
           </div>
-          <div className="items-start flex-wrap flex justify-between">
+          <div className="items-start flex-wrap flex md:px-[134px]">
             {!!watchListLoading && (
               <div className="flex w-full justify-center">
                 <LoadingSpinner size={66}/>
               </div>
             )}
             {!!watchList && watchList.map(item => (
-              <div className="flex flex-wrap md:w-48 md:h-96 m-2 justify-center"
+              <div className="flex flex-wrap md:w-48 md:h-96 p-2 justify-center"
                 key={item.id}
               >
                 <Image
@@ -248,11 +264,11 @@ const Home: NextPage = () => {
                   alt={`${item.name} image`}
                   className="rounded-xl md:w-[180px] md:h-[251px]"
                 />
-                <div className="flex h-20">
+                <div className="flex h-20 font-thin">
                   <span>{item.name}</span>
                 </div>
-                <div>
-                  <span>{item.price}</span>
+                <div className="flex">
+                  <span>{checkDiscount(item.price)}</span>
                 </div>
               </div>
             ))}
