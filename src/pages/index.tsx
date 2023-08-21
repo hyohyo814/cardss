@@ -243,17 +243,18 @@ const Home: NextPage = () => {
            peer-checked/selections-btn:translate-y-[480px] transition
            ease-in-out flex flex-wrap justify-center">
             <h2 className="flex w-full text-4xl font-thin border-b border-gray-50
-              p-2 mb-4 md:h-20">
+              p-2 mb-6 md:h-16">
               <span>Most Popular</span>
             </h2>
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap overflow-y-auto h-96 md:h-full justify-center">
               {!!popProdLoading && (
                 <div className="flex w-full justify-center">
                   <LoadingSpinner size={66}/>
                 </div>
               )}
               {!!popularProducts && popularProducts.map(item => (
-                <div className="flex flex-wrap md:w-48 md:h-96 p-2 justify-center"
+                <div className="flex flex-wrap md:w-48 md:h-96 p-2 justify-center
+                  w-40 h-96"
                   key={item.id}
                 >
                   <Image
@@ -287,15 +288,24 @@ const Home: NextPage = () => {
               </div>
             )}
             {!!watchList && watchList.map(item => (
-              <div className="flex flex-wrap md:w-48 md:h-96 p-2"
+              <div className="flex relative flex-wrap md:w-48 md:h-96 p-2 md:group
+                w-40 h-96"
                 key={item.id}
               >
+                <input type="checkbox" name="mobileTouch" id={item.id} className="absolute peer z-30" />
+                <label htmlFor={item.id} className="absolute md:hidden w-full h-full pr-4 z-30" />
+                <div className="absolute flex invisible flex-col w-full h-full pr-4 pt-6 items-center z-20
+                 md:group-hover:visible transition ease-in-out peer-checked:visible">
+                  <button className="bg-gray-800 w-24 h-10 rounded-full my-2">Go to link</button>
+                  <button className="bg-rose-500 w-24 h-10 rounded-full my-2">Remove</button>
+                </div>
                 <Image
                   src={item.image}
                   height={365}
                   width={262}
                   alt={`${item.name} image`}
-                  className="rounded-xl md:w-[180px] md:h-[251px]"
+                  className="rounded-xl md:w-[180px] md:h-[251px]
+                  md:group-hover:blur z-10 transition peer-checked:blur"
                 />
                 <div className="flex h-20 font-thin">
                   <span>{item.name}</span>
