@@ -28,31 +28,25 @@ export const usersRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const { userId } = ctx;
       const { productId } = input;
-      const userExist = await ctx.prisma.user.findFirst({
+    return await ctx.prisma.user.upsert({
         where: {
           userId: userId,
         },
-      });
-
-      if (!userExist) {
-        await ctx.prisma.user.create({
-          data: {
-            userId: userId,
-          },
-        });
-      };
-
-      return await ctx.prisma.user.update({
-        where: {
-          userId: userId,
-        },
-        data: {
+        update: {
           watchList: {
             connect: {
               id: productId,
             },
           },
         },
+        create: {
+          userId: userId,
+          watchList: {
+            connect: {
+              id: productId,
+            }
+          }
+        }
       });
     }),
   

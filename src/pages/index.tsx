@@ -45,7 +45,6 @@ function SeriesOptions({
 function ProductsOptions({ productsData }: { productsData: Product[] }) {
   const [productId, setProductId] = useState('');
   const { user } = useUser();
-  const { data: userData, isLoading: userLoading } = api.users.getUserList.useQuery();
   const ctx = api.useContext();
   const { mutate } = api.users.saveProduct.useMutation({
     onSuccess: () => {
@@ -68,9 +67,7 @@ function ProductsOptions({ productsData }: { productsData: Product[] }) {
     }
     const target = e.target as HTMLInputElement;
     const { value } = target; 
-    if (userData) {
-      mutate({ productId: value });
-    }  
+    mutate({ productId: value });
   }
 
   return (
