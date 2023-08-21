@@ -17,9 +17,9 @@ export const usersRouter = createTRPCRouter({
       where: {
         userId: userId,
       },
-      include: {
-        watchList: true,
-      },
+      select: {
+        watchList: true
+      }
     });
   }),
 
