@@ -239,53 +239,55 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
-          <div className="absolute top-16 z-10 h-3/4 w-full bg-black
+          <div className="absolute top-16 z-10 w-full bg-black
            peer-checked/selections-btn:translate-y-[480px] transition
            ease-in-out flex flex-wrap justify-center">
-            <h2 className="w-full text-4xl font-thin border-b border-gray-50
-              p-2 mb-4">
+            <h2 className="flex w-full text-4xl font-thin border-b border-gray-50
+              p-2 mb-4 md:h-20">
               <span>Most Popular</span>
             </h2>
-            {!!popProdLoading && (
-              <div className="flex w-full justify-center">
-                <LoadingSpinner size={66}/>
-              </div>
-            )}
-            {!!popularProducts && popularProducts.map(item => (
-              <div className="flex flex-wrap md:w-48 md:h-96 p-2 justify-center"
-                key={item.id}
-              >
-                <Image
-                  src={item.image}
-                  height={365}
-                  width={262}
-                  alt={`${item.name} image`}
-                  className="rounded-xl md:w-[180px] md:h-[251px]"
-                />
-                <div className="flex h-20 font-thin">
-                  <span>{item.name}</span>
+            <div className="flex flex-wrap">
+              {!!popProdLoading && (
+                <div className="flex w-full justify-center">
+                  <LoadingSpinner size={66}/>
                 </div>
-                <div className="flex">
-                  <span>{checkDiscount(item.price)}</span>
+              )}
+              {!!popularProducts && popularProducts.map(item => (
+                <div className="flex flex-wrap md:w-48 md:h-96 p-2 justify-center"
+                  key={item.id}
+                >
+                  <Image
+                    src={item.image}
+                    height={365}
+                    width={262}
+                    alt={`${item.name} image`}
+                    className="rounded-xl md:w-[180px] md:h-[251px]"
+                  />
+                  <div className="flex h-20 font-thin">
+                    <span>{item.name}</span>
+                  </div>
+                  <div className="flex">
+                    <span>{checkDiscount(item.price)}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-        <div className="flex flex-wrap z-20 w-full bg-black
-        p-2 absolute top-[550px] h-1/2">
+        <div className="flex flex-col z-20 w-full bg-black
+        p-2 absolute top-[550px] h-1/2 items-center">
           <div className="flex w-full text-4xl font-thin border-b border-gray-50
           mb-6 p-2 md:h-16">
             <h2>Wishlist</h2>
           </div>
-          <div className="items-start flex-wrap flex md:px-[134px]">
+          <div className="flex-wrap flex md:w-[1152px]">
             {!!watchListLoading && (
               <div className="flex w-full justify-center">
                 <LoadingSpinner size={66}/>
               </div>
             )}
             {!!watchList && watchList.map(item => (
-              <div className="flex flex-wrap md:w-48 md:h-96 p-2 justify-center"
+              <div className="flex flex-wrap md:w-48 md:h-96 p-2"
                 key={item.id}
               >
                 <Image
