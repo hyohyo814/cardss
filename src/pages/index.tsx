@@ -41,7 +41,8 @@ const Home: NextPage = () => {
          id="selections-container"
          className="relative flex h-1/2 w-full
          flex-wrap">
-          <AnimateDropdown />
+          {!!user && <>
+            <AnimateDropdown />
           <div
            id="selections"
            className="absolute md:top-[-340px] top-[-490px] z-10 flex w-full
@@ -49,6 +50,7 @@ const Home: NextPage = () => {
            peer-checked/selections-btn:translate-y-[560px]">
             <DropdownSelections />
           </div>
+          </>}
           <div className="absolute top-16 z-10 w-full bg-black
            peer-checked/selections-btn:translate-y-[480px] transition
            ease-in-out flex flex-wrap justify-center">
@@ -57,7 +59,7 @@ const Home: NextPage = () => {
         </div>
         <div className="flex flex-col z-20 w-full bg-black
         p-2 absolute top-[550px] h-screen">
-          <Wishlist />
+          {!!user && <Wishlist />}
         </div>
       </div>
     </PageLayout>
