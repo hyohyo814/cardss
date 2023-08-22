@@ -17,7 +17,7 @@ const Home: NextPage = () => {
   return (
     <PageLayout>
       <div className="sticky top-0 z-50 flex h-14 justify-between
-        -gray-300 bg-black md:h-24">
+        -gray-300 bg-black md:h-24 border-b">
         <div className="flex items-end px-6 py-2 text-4xl font-semibold">
           <span>CARDSS</span>
         </div>
