@@ -12,10 +12,10 @@ export default function DropdownSelections() {
     api.products.getFromSeries.useQuery({ seriesId: selectedSeries });
 
   return (
-    <div className="flex w-full">
+    <div className="flex w-full flex-wrap">
       <div
-       className="flex h-96 w-1/2 flex-col
-       bg-gray-800"
+       className="flex md:h-96 md:w-1/2 flex-col
+       bg-gray-800 w-full h-60"
       >
         <legend className="flex bg-black text-xl font-semibold">
           Titles
@@ -35,7 +35,8 @@ export default function DropdownSelections() {
           )}
         </div>
       </div>
-      <div className="flex h-96 w-1/2 flex-col z-20 bg-gray-800">
+      <div className="flex md:h-96 md:w-1/2 flex-col z-20
+        bg-gray-800 w-full h-60">
         <legend className="flex bg-black text-xl font-semibold">
           <span>Products</span>
         </legend>

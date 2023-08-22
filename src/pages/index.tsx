@@ -44,8 +44,9 @@ const Home: NextPage = () => {
           <AnimateDropdown />
           <div
            id="selections"
-           className="absolute top-[-340px] z-10 flex w-full
-           transition ease-in-out peer-checked/selections-btn:translate-y-[390px]">
+           className="absolute md:top-[-340px] top-[-490px] z-10 flex w-full
+           transition ease-in-out md:peer-checked/selections-btn:translate-y-[390px]
+           peer-checked/selections-btn:translate-y-[560px]">
             <DropdownSelections />
           </div>
           <div className="absolute top-16 z-10 w-full bg-black
