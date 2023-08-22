@@ -6,7 +6,30 @@ import CheckDiscount from "./price";
 export default function PopularProducts() {
   const { data: popularProducts, isLoading: popProdLoading } =
     api.products.getPopular.useQuery();
+  const ctx = api.useContext();
+  const { mutate } = api.users.saveProduct.useMutation({
+    onSuccess: () => {
+      void ctx.users.getUserList.invalidate();
+    },
+    onError: (e) => {
+      const errorMessage = e.data?.zodError?.fieldErrors.content;
+      if (errorMessage?.[0]) {
+        console.error(errorMessage[0]!)
+      } else {
+        console.error('Failed to add! Please try again later');
+      }
+    },
+  });
 
+  function handler(e: React.SyntheticEvent) {
+    e.preventDefault();
+    if (!e.target) {
+      console.error('ProductOptions()@index.tsx: id missing from product');
+    }
+    const target = e.target as HTMLInputElement;
+    const { value } = target; 
+    mutate({ productId: value });
+  }
 
   return (
     <div className="w-full">
@@ -28,8 +51,17 @@ export default function PopularProducts() {
             <input type="checkbox" name="popular" id={`popular/${item.id}`} className="hidden absolute peer z-30" />
             <label htmlFor={`popular/${item.id}`} className="absolute md:hidden w-full h-full z-30" />
             <div className="absolute flex invisible flex-col w-full h-full pt-12 items-center z-20
-             md:group-hover:visible transition ease-in-out peer-checked:visible">
-              <button className="bg-gray-800 w-24 h-10 rounded-full my-2">Go to link</button>
+              md:group-hover:visible transition ease-in-out peer-checked:visible">
+            {!!item.productLink &&
+              <>
+                <button className="bg-gray-800 w-24 h-10 rounded-full my-2">Go to link</button>
+              </>}
+              <button
+                className="bg-gray-800 w-24 h-10 rounded-full my-2"
+                value={item.id}
+                onClick={handler}>
+                Add to list
+              </button>
             </div>
             <Image
               src={item.image}
