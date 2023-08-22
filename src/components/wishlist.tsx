@@ -58,7 +58,7 @@ export default function Wishlist() {
                   {!!item.productLink && <a 
                     className="bg-gray-800 w-24 h-10 rounded-full z-40 my-2
                     font-semibold flex justify-center items-center"
-                    href={item.productLink!}>                    
+                    href={item.productLink}>                    
                     Go to link
                   </a>}
                   <button
