@@ -54,12 +54,16 @@ export default function Wishlist() {
              md:group-hover:visible transition ease-in-out peer-checked:visible md:left-0 md:w-full">
               {!isLoading && (
                 <>
-                  <button className="bg-gray-800 w-24 h-10 rounded-full z-40 my-2">Go to link</button>
+                  <a 
+                    className="bg-gray-800 w-24 h-10 rounded-full z-40 my-2"
+                    href="https://google.com">                    
+                    <span>Go to link</span>
+                  </a>
                   <button
                     className="bg-rose-500 w-24 h-10 rounded-full z-40 my-2"
                     value={item.id}
                     onClick={handler}>
-                    Remove
+                    <span>Remove</span>
                   </button>
                 </>)}
               {!!isLoading && (
