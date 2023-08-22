@@ -21,14 +21,15 @@ export default function Wishlist() {
     },
   });
 
+  console.log(userWatchList)
   function handler(e: React.SyntheticEvent) {
     e.preventDefault();
     if (!e.target) {
       console.error('ProductOptions()@index.tsx: id missing from product');
     }
     const target = e.target as HTMLInputElement;
-    const { value } = target; 
-    mutate({ productId: value });
+    console.log(target)
+    mutate({ productId: target.value });
   }
 
   return (
@@ -54,16 +55,17 @@ export default function Wishlist() {
              md:group-hover:visible transition ease-in-out peer-checked:visible md:left-0 md:w-full">
               {!isLoading && (
                 <>
-                  <a 
-                    className="bg-gray-800 w-24 h-10 rounded-full z-40 my-2"
-                    href="https://google.com">                    
-                    <span>Go to link</span>
-                  </a>
+                  {!!item.productLink && <a 
+                    className="bg-gray-800 w-24 h-10 rounded-full z-40 my-2
+                    font-semibold flex justify-center items-center"
+                    href={item.productLink!}>                    
+                    Go to link
+                  </a>}
                   <button
                     className="bg-rose-500 w-24 h-10 rounded-full z-40 my-2"
                     value={item.id}
                     onClick={handler}>
-                    <span>Remove</span>
+                    Remove
                   </button>
                 </>)}
               {!!isLoading && (
