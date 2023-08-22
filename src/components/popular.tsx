@@ -2,8 +2,10 @@ import { api } from "~/utils/api";
 import { LoadingSpinner } from "./loading";
 import Image from "next/image";
 import CheckDiscount from "./price";
+import { useUser } from "@clerk/nextjs";
 
 export default function PopularProducts() {
+  const { isSignedIn } = useUser();
   const { data: popularProducts, isLoading: popProdLoading } =
     api.products.getPopular.useQuery();
   const ctx = api.useContext();
@@ -48,7 +50,7 @@ export default function PopularProducts() {
             w-40 h-96 group"
             key={item.id}
           >
-            <input type="checkbox" name="popular" id={`popular/${item.id}`} className="hidden absolute peer z-30" />
+            {!!isSignedIn && <><input type="checkbox" name="popular" id={`popular/${item.id}`} className="hidden absolute peer z-30" />
             <label htmlFor={`popular/${item.id}`} className="absolute md:hidden w-full h-full z-30" />
             <div className="absolute flex invisible flex-col w-full h-full pt-12 items-center z-20
               md:group-hover:visible transition ease-in-out peer-checked:visible">
@@ -70,7 +72,16 @@ export default function PopularProducts() {
               alt={`${item.name} image`}
               className="rounded-xl md:w-[180px] md:h-[251px]
               md:group-hover:blur z-10 transition peer-checked:blur" 
-            />
+            /></>}
+            {!isSignedIn && <>
+              <Image
+                src={item.image}
+                height={365}
+                width={262}
+                alt={`${item.name} image`}
+                className="rounded-xl md:w-[180px] md:h-[251px]"
+              />
+            </>}
             <div className="flex h-20 font-thin">
               <span>{item.name}</span>
             </div>

@@ -41,7 +41,7 @@ const Home: NextPage = () => {
          id="selections-container"
          className="relative flex h-1/2 w-full
          flex-wrap">
-          {!!user && <>
+          {!!isSignedIn && <>
             <AnimateDropdown />
           <div
            id="selections"
@@ -59,7 +59,7 @@ const Home: NextPage = () => {
         </div>
         <div className="flex flex-col z-20 w-full bg-black
         p-2 absolute top-[550px] h-screen">
-          {!!user && <Wishlist />}
+          {!!isSignedIn && <Wishlist />}
         </div>
       </div>
     </PageLayout>
