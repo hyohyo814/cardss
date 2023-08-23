@@ -22,10 +22,6 @@ const Home: NextPage = () => {
           <span>CARDSS</span>
         </div>
         <div id="user" className="flex md:p-4">
-          {!isSignedIn && 
-            <div className="px-2 py-4 md:hover:scale-150 transition ease-in-out">
-              <SignInButton />
-            </div>}
           {!!isSignedIn && <SignOutButton />}
           {!!isSignedIn && (
             <Image
@@ -61,12 +57,12 @@ const Home: NextPage = () => {
           </div>
         </div>
         {!isSignedIn &&
-          <div className="w-full justify-center flex">
+          <div className="w-full absolute md:bottom-60 bottom-40 justify-center flex mt-6">
             <SignInButton>
-              <button className="flex absolute md:bottom-60 z-40 md:text-4xl md:w-1/2 justify-center
+              <button className="flex md:text-4xl md:w-1/2 justify-center
                 h-36 rounded-xl items-center bg-slate-950/80 border cursor-pointer
                 md:hover:bg-white md:hover:text-black transition duration-500 md:hover:scale-110 font-light
-                bottom-40 text-2xl hover:bg-white hover:text-black w-3/4">
+                text-2xl hover:bg-white hover:text-black w-3/4">
                 Sign in to use Wishlist
               </button>
             </SignInButton>
