@@ -58,9 +58,10 @@ export default function ProductsOptions({ productsData }: { productsData: Produc
           >
             {res.name}
           </label>
-          <div className="w-3/5 h-64 backdrop-blur-sm md:peer-checked:translate-x-96
+          <div className="w-3/5 invisible h-64 backdrop-blur-sm md:peer-checked:translate-x-96
             transition duration-500 -left-96 absolute top-8 my-2 rounded-r-xl
-            border-y border-r z-50 backdrop-brightness-50">
+            border-y border-r z-50 backdrop-brightness-50
+            peer-checked:visible delay-300">
             <div className="w-32 h-12 absolute top-1 right-1 flex justify-end">
               <label
                 className="flex h-12 w-12 bg-rose-500 cursor-pointer
@@ -83,8 +84,9 @@ export default function ProductsOptions({ productsData }: { productsData: Produc
               Add to list
             </button> 
           </div>
-          <div className="h-0 top-8 -left-96 z-50 absolute 
-            md:peer-checked:translate-x-96 md:peer-checked:visible transition duration-1000">
+          <div className="h-0 top-8 -left-96 z-50 absolute invisible 
+            md:peer-checked:translate-x-96 md:peer-checked:visible transition duration-1000
+            ease-in-out">
             <Image
               src={res.image === 'no-image' ? '/api/blankImage' : res.image}
               height={365}

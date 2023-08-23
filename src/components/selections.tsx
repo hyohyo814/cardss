@@ -14,9 +14,8 @@ export default function DropdownSelections() {
   return (
     <div className="flex w-full flex-wrap">
       <div
-       className="flex md:h-96 md:w-1/2 flex-col
-       bg-gray-800 w-full h-56 md:rounded-bl-xl"
-      >
+       className="flex md:h-[450px] md:w-1/2 flex-col
+       bg-gray-800 w-full h-56 md:rounded-bl-xl">
         <div className="flex bg-white text-black w-full text-2xl p-2
           relative border-2 border-white">
           <div className='absolute w-1/2 h-full top-0 -right-2
@@ -35,12 +34,11 @@ export default function DropdownSelections() {
           {seriesData && (
             <SeriesOptions
               seriesData={seriesData}
-              setSelectedSeries={setSelectedSeries}
-            />
+              setSelectedSeries={setSelectedSeries} />
           )}
         </div>
       </div>
-      <div className="flex md:h-96 md:w-1/2 flex-col z-20
+      <div className="flex md:h-[450px] md:w-1/2 flex-col z-20
         bg-gray-800 w-full h-56 rounded-br-xl">
         <div className="flex bg-white text-2xl p-2 justify-end relative w-full
           text-black border-2 border-white">
@@ -50,7 +48,7 @@ export default function DropdownSelections() {
             bg-black -skew-x-12'/>
           <span>Products</span>
         </div>
-        <div className="flex flex-col overflow-y-scroll w-full h-96 p-4">
+        <div className="flex flex-col overflow-y-scroll h-full w-full p-4">
           {!!productsLoading && (
             <div className="flex items-center justify-center pt-[24px]">
               <LoadingSpinner size={36} />
