@@ -46,13 +46,13 @@ const Home: NextPage = () => {
            id="selections"
            className="absolute md:top-[-340px] top-[-490px] z-10 flex w-full
            transition ease-in-out md:peer-checked/selections-btn:translate-y-[390px]
-           peer-checked/selections-btn:translate-y-[560px]">
+           peer-checked/selections-btn:translate-y-[560px] duration-500">
             <DropdownSelections />
           </div>
           </>}
           <div className="absolute top-16 z-10 w-full bg-black
            peer-checked/selections-btn:translate-y-[480px] transition
-           ease-in-out flex flex-wrap justify-center">
+           ease-in-out flex flex-wrap justify-center duration-500">
             <PopularProducts />
           </div>
         </div>
