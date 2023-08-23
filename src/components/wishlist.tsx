@@ -40,11 +40,11 @@ export default function Wishlist() {
 
   return (
     <div className="w-full flex flex-col items-center">
-    <h2 className="flex w-full text-4xl font-thin border-b border-gray-50
-      mb-6 p-2 md:h-16">
+      <h2 className="flex w-full text-4xl font-thin border-b border-gray-50
+        mb-6 p-2 md:h-16">
         <span>Wishlist</span>
       </h2>
-      <div className="flex-wrap flex md:w-[1152px]">
+      <div className="flex-wrap flex md:w-[1152px] mx-6">
         {!!watchListLoading && (
           <div className="flex w-full justify-center">
             <LoadingSpinner size={66}/>
