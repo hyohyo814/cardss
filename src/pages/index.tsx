@@ -34,7 +34,7 @@ const Home: NextPage = () => {
           )}
         </div>
       </div>
-      <div id="container" className="mx-6 flex h-screen bg-black md:mx-24
+      <div id="container" className="flex h-screen bg-black md:mx-60
       flex-wrap relative">
         <div
          id="selections-container"
