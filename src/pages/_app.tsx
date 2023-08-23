@@ -8,8 +8,8 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <ClerkProvider {...pageProps}>
       <Head>
-        <title>SiteHoarder</title>
-        <meta name="description" content="A site to hoard your sites." />
+        <title>Cardss</title>
+        <meta name="description" content="A site to hoard your cards." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Component {...pageProps} />

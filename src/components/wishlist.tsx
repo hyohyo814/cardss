@@ -2,8 +2,10 @@ import { api } from "~/utils/api";
 import Image from "next/image";
 import { LoadingSpinner } from "./loading";
 import CheckDiscount from "./price";
+import { useUser } from "@clerk/nextjs";
 
 export default function Wishlist() {
+  const { isSignedIn } = useUser();
   const { data: userWatchList, isLoading: watchListLoading } =
     api.users.getUserList.useQuery();
   const ctx = api.useContext();
@@ -30,6 +32,10 @@ export default function Wishlist() {
     const target = e.target as HTMLInputElement;
     console.log(target)
     mutate({ productId: target.value });
+  }
+
+  if (!isSignedIn) {
+    return <div />
   }
 
   return (

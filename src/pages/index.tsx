@@ -22,7 +22,10 @@ const Home: NextPage = () => {
           <span>CARDSS</span>
         </div>
         <div id="user" className="flex md:p-4">
-          {!isSignedIn && <SignInButton />}
+          {!isSignedIn && 
+            <div className="px-2 py-4 md:hover:scale-150 transition ease-in-out">
+              <SignInButton />
+            </div>}
           {!!isSignedIn && <SignOutButton />}
           {!!isSignedIn && (
             <Image
@@ -35,7 +38,7 @@ const Home: NextPage = () => {
           )}
         </div>
       </div>
-      <div id="container" className="mx-6 flex h-min-screen bg-black md:mx-24
+      <div id="container" className="mx-6 flex h-screen bg-black md:mx-24
       flex-wrap relative">
         <div
          id="selections-container"
@@ -57,10 +60,21 @@ const Home: NextPage = () => {
             <PopularProducts />
           </div>
         </div>
-        <div className="flex flex-col z-20 w-full bg-black
+        {!isSignedIn &&
+          <div className="w-full justify-center flex">
+            <SignInButton>
+              <button className="flex absolute md:bottom-60 z-40 md:text-4xl md:w-1/2 justify-center
+                h-36 rounded-xl items-center bg-slate-950/80 border cursor-pointer
+                md:hover:bg-white md:hover:text-black transition duration-500 md:hover:scale-110 font-light
+                bottom-40 text-2xl hover:bg-white hover:text-black w-3/4">
+                Sign in to use Wishlist
+              </button>
+            </SignInButton>
+          </div>}
+        {!!isSignedIn && <div className="flex flex-col z-20 w-full bg-black
         p-2 absolute top-[550px] h-screen">
-          {!!isSignedIn && <Wishlist />}
-        </div>
+          <Wishlist />
+        </div>}
       </div>
     </PageLayout>
   );
