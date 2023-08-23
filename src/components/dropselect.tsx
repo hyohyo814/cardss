@@ -9,10 +9,6 @@ export default function AnimateDropdown() {
        w-full justify-center border-b
        pt-3 md:hover:cursor-pointer "
        ></label>
-      <div className="absolute flex right-0 -top-20 justify-center w-full text-4xl z-30
-        peer-checked/selections-btn:translate-y-20 transition scale-50">
-        <span>&#9650;</span>
-      </div>
       <div
        className="absolute -left-60 z-30
        pt-3 shadow-white
@@ -22,7 +18,7 @@ export default function AnimateDropdown() {
         <span>COLLAPSE</span>
       </div>
       <div className="absolute flex right-0 justify-center w-full text-4xl z-30
-        peer-checked/selections-btn:-translate-y-20 transition scale-50">
+        peer-checked/selections-btn:rotate-180 transition scale-50 -top-3">
         <span>&#9660;</span>
       </div>
       <div
