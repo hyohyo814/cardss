@@ -18,6 +18,7 @@
     "@trpc/next": "^10.34.0",
     "@trpc/react-query": "^10.34.0",
     "@trpc/server": "^10.34.0",
+    "@vercel/og": "^0.5.11",
     "axios": "^1.4.0",
     "cheerio": "^1.0.0-rc.12",
     "next": "^13.4.2",
