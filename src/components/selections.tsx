@@ -15,11 +15,15 @@ export default function DropdownSelections() {
     <div className="flex w-full flex-wrap">
       <div
        className="flex md:h-96 md:w-1/2 flex-col
-       bg-gray-800 w-full h-60"
+       bg-gray-800 w-full h-56"
       >
-        <legend className="flex bg-black text-2xl p-2">
-          Titles
-        </legend>
+        <div className="flex bg-white text-black w-full text-2xl p-2 relative">
+          <div className='absolute w-1/2 h-full top-0 -right-2
+            bg-black skew-x-12'/>
+          <div className='absolute w-1/2 h-full top-0 -right-2
+            bg-black -skew-x-12'/>
+          <span>Titles</span>
+        </div>
         <div className="h-full overflow-y-scroll">
           {!seriesData ||
             (!!seriesLoading && (
@@ -36,10 +40,15 @@ export default function DropdownSelections() {
         </div>
       </div>
       <div className="flex md:h-96 md:w-1/2 flex-col z-20
-        bg-gray-800 w-full h-60">
-        <legend className="flex bg-black text-2xl p-2 justify-end">
+        bg-gray-800 w-full h-56 rounded-b-xl">
+        <div className="flex bg-white text-2xl p-2 justify-end relative w-full
+          text-black">
+          <div className='absolute w-1/2 h-full top-0 -left-2
+            bg-black skew-x-12'/>
+          <div className='absolute w-1/2 h-full top-0 -left-2
+            bg-black -skew-x-12'/>
           <span>Products</span>
-        </legend>
+        </div>
         <div className="overflow-y-scroll">
           {!!productsLoading && (
             <div className="flex items-center justify-center pt-[24px]">
