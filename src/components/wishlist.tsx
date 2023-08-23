@@ -23,14 +23,12 @@ export default function Wishlist() {
     },
   });
 
-  console.log(userWatchList)
   function handler(e: React.SyntheticEvent) {
     e.preventDefault();
     if (!e.target) {
       console.error('ProductOptions()@index.tsx: id missing from product');
     }
     const target = e.target as HTMLInputElement;
-    console.log(target)
     mutate({ productId: target.value });
   }
 

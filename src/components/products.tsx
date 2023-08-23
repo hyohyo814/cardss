@@ -2,10 +2,8 @@ import { type Product } from "@prisma/client";
 import { api } from "~/utils/api"
 import Image from "next/image";
 import CheckDiscount from "./price";
-import { useState } from "react";
 
 export default function ProductsOptions({ productsData }: { productsData: Product[] }) {
-  const [checked, setChecked] = useState(false); 
   const ctx = api.useContext();
   const { mutate } = api.users.saveProduct.useMutation({
     onSuccess: () => {
@@ -29,14 +27,6 @@ export default function ProductsOptions({ productsData }: { productsData: Produc
     const target = e.target as HTMLInputElement;
     const { value } = target; 
     mutate({ productId: value });
-  }
-
-  function checkOne(e: HTMLInputElement) {
-    const checkbox = document.getElementsByClassName("productsoption") as HTMLCollectionOf<HTMLInputElement>;
-    for (let i = 0; i < checkbox.length; i++) {
-      checkbox.item(i)!.checked = false;
-    }
-
   }
 
   return (
@@ -86,7 +76,10 @@ export default function ProductsOptions({ productsData }: { productsData: Produc
               <CheckDiscount priceStr={res.price} />
             </div>
             <button
-              className="h-12 w-32 bg-gray-800 absolute right-0 mx-4 top-40 rounded-full">
+              className="h-12 w-32 bg-gray-800 absolute right-0 mx-4 top-40 rounded-full
+              md:hover:bg-white md:hover:text-black transition ease-in-out"
+              value={res.id}
+              onClick={handler}>
               Add to list
             </button> 
           </div>
