@@ -48,7 +48,7 @@ export default function DropdownSelections() {
             bg-black -skew-x-12'/>
           <span>Products</span>
         </div>
-        <div className="flex flex-col overflow-y-scroll h-full w-full p-4">
+        <div className="flex flex-col snap-y snap-mandatory overflow-y-scroll h-full w-full p-4">
           {!!productsLoading && (
             <div className="flex items-center justify-center pt-[24px]">
               <LoadingSpinner size={36} />
