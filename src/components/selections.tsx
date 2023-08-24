@@ -63,8 +63,7 @@ export default function DropdownSelections() {
               onChange={seriesHandle}
               className='h-full w-full bg-transparent px-6
               text-white text-sm font-light rounded-xl
-              text-center'
-            />
+              text-center' />
           </div>
         </div>
         <div className="h-full overflow-y-scroll p-4">
@@ -92,8 +91,7 @@ export default function DropdownSelections() {
               onChange={productsHandle}
               className='h-full w-full bg-transparent px-6
               text-white text-sm font-light rounded-xl
-              text-center'
-            />
+              text-center' />
           </div>
           <span>Products</span>
         </div>

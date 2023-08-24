@@ -62,8 +62,8 @@ const Home: NextPage = () => {
             <SignInButton>
               <button className="flex md:text-4xl md:w-1/2 justify-center
                 h-36 rounded-xl items-center bg-slate-950/80 border cursor-pointer
-                md:hover:bg-white md:hover:text-black transition duration-500 md:hover:scale-110 font-light
-                text-2xl hover:bg-white hover:text-black w-3/4">
+                md:hover:bg-white md:hover:text-black transition duration-500
+                md:hover:scale-110 font-light text-2xl hover:bg-white hover:text-black w-3/4">
                 Sign in to use Wishlist
               </button>
             </SignInButton>

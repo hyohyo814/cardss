@@ -52,20 +52,24 @@ export default function Wishlist() {
         {!!userWatchList && userWatchList?.watchList.map(item => (
           <div className="flex relative flex-wrap md:w-48 md:h-96 p-2 group
             w-40 h-96"
-            key={item.id}
-          >
-            <input type="checkbox" name="wishlist" id={`wishlist/${item.id}`} className="hidden absolute peer" />
+            key={item.id} >
+            <input
+              type="checkbox"
+              name="wishlist"
+              id={`wishlist/${item.id}`}
+              className="hidden absolute peer" />
             <label htmlFor={`wishlist/${item.id}`} className="absolute md:hidden w-full h-full pr-4 z-30" />
             <div className="absolute left-8 flex invisible flex-col mt-6 items-center z-40
              md:group-hover:visible transition ease-in-out peer-checked:visible md:left-0 md:w-full">
               {!isLoading && (
                 <>
-                  {!!item.productLink && <a 
-                    className="bg-gray-800 w-24 h-10 rounded-full z-40 my-2
-                    font-semibold flex justify-center items-center"
-                    href={item.productLink}>                    
-                    Go to link
-                  </a>}
+                  {!!item.productLink &&
+                    <a 
+                      className="bg-gray-800 w-24 h-10 rounded-full z-40 my-2
+                      font-semibold flex justify-center items-center"
+                      href={item.productLink}>                    
+                      Go to link
+                    </a>}
                   <button
                     className="bg-rose-500 w-24 h-10 rounded-full z-40 my-2"
                     value={item.id}
@@ -85,8 +89,7 @@ export default function Wishlist() {
               width={262}
               alt={`${item.name} image`}
               className="rounded-xl md:w-[180px] md:h-[251px]
-              md:group-hover:blur z-10 transition peer-checked:blur"
-            />
+              md:group-hover:blur z-10 transition peer-checked:blur" />
             <div className="flex h-20 font-thin">
               <span>{item.name}</span>
             </div>

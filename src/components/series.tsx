@@ -10,21 +10,19 @@ export default function SeriesOptions({
   return (
     <>
       {seriesData.map((res) => (
-        <div key={res.id} id={res.title} className="font-light series_item flex" hidden={true}>
+        <div key={res.id} id={res.title} className="font-light series_item flex">
           <input
             className="peer hidden"
             id={res.id}
             name="title"
             type="radio"
             value={res.id}
-            onChange={(e) => setSelectedSeries(e.target.value)}
-          />
+            onChange={(e) => setSelectedSeries(e.target.value)} />
           <label
             className="break-word w-full border-b
             border-gray-700 p-1 peer-checked:bg-slate-300
             peer-checked:text-black md:hover:cursor-pointer md:hover:bg-slate-200 md:hover:text-black"
-            htmlFor={res.id}
-          >
+            htmlFor={res.id} >
             <span>{res.title}</span>
           </label>
         </div>

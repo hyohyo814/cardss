@@ -48,15 +48,13 @@ export default function ProductsOptions({ productsData }: { productsData: Produc
                 }
               }
               e.target.checked === true ? false : true
-            }}
-          />
+            }} />
           <label
             className="break-word w-full border-b
             border-gray-700 p-1
             peer-checked:bg-slate-300 peer-checked:text-black md:hover:cursor-pointer
             md:hover:bg-slate-200 md:hover:text-black"
-            htmlFor={res.id}
-          >
+            htmlFor={res.id}>
             {res.name}
           </label>
           <div className="w-3/5 invisible h-64 backdrop-blur-sm md:peer-checked:translate-x-96
@@ -79,9 +77,10 @@ export default function ProductsOptions({ productsData }: { productsData: Produc
               <CheckDiscount priceStr={res.price} />
             </div>
             <button
-              className="md:h-12 md:w-32 bg-gray-800 absolute md:left-28 md:mx-14 md:my-0 md:top-44 rounded-full
-              md:hover:bg-white md:hover:text-black transition ease-in-out bottom-0 h-6 w-32 left-0 mx-2
-              my-2 border font-light"
+              className="md:h-12 md:w-32 bg-gray-800 absolute md:left-28
+              md:mx-14 md:my-0 md:top-44 rounded-full md:hover:bg-white
+              md:hover:text-black transition ease-in-out bottom-0 h-6 w-32
+              left-0 mx-2 my-2 border font-light"
               value={res.id}
               onClick={handler}>
               Add to list
@@ -96,9 +95,7 @@ export default function ProductsOptions({ productsData }: { productsData: Produc
               width={262}
               alt={`${res.name} image`}
               className="rounded-xl md:w-[150px] md:h-[209px] mx-2 my-6
-              bg-slate-950/80 shadow-sm shadow-white w-32"
-            />
-            <button></button>
+              bg-slate-950/80 shadow-sm shadow-white w-32" />
           </div>
         </div>
       ))}
