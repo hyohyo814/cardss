@@ -15,7 +15,11 @@ export default function DropdownSelections() {
     e.preventDefault();
     const seriesElements = document.getElementsByClassName('series_item') as HTMLCollectionOf<HTMLDivElement>;
     const { value } = e.target as HTMLInputElement
-
+    if (!value) {
+      for (const el of seriesElements) {
+        el.style.display = 'flex';
+      }
+    }
     if (value && value !== null) {
       for (const el of seriesElements) {
         el.style.display = 'flex';
@@ -29,10 +33,12 @@ export default function DropdownSelections() {
   function productsHandle(e: React.SyntheticEvent) {
     e.preventDefault();
     const productsElements = document.getElementsByClassName('product_item') as HTMLCollectionOf<HTMLDivElement>;
-    console.log(productsElements)
-
     const { value } = e.target as HTMLInputElement
-    
+    if (!value) {
+      for (const el of productsElements) {
+        el.style.display = 'flex';
+      }
+    }
     if (value && value !== null) {
       for (const el of productsElements) {
         el.style.display = 'flex';
@@ -45,21 +51,21 @@ export default function DropdownSelections() {
 
   return (
     <div className="flex w-full flex-wrap">
-      <div
-       className="flex md:h-[450px] md:w-1/2 flex-col
+      <div className="flex md:h-[450px] md:w-1/2 flex-col
        bg-gray-800 w-full h-56 md:rounded-bl-xl">
-        <div className="flex bg-white text-black w-full text-2xl p-2
-          relative border-2 border-white">
-          <div className='absolute w-4/5 h-full top-0 -right-2
-            bg-black rounded-xl'>
+        <div className="flex bg-white text-black w-full text-2xl px-2
+          border-2 border-white">
+          <span>Titles</span>
+          <div className='w-full h-full
+            bg-black rounded-xl mx-4 flex items-center'>
             <input
               placeholder="Search by series..."
               onChange={seriesHandle}
-              className='h-full w-full bg-black px-6
-              text-white text-md font-light'
+              className='h-full w-full bg-transparent px-6
+              text-white text-sm font-light rounded-xl
+              text-center'
             />
           </div>
-          <span>Titles</span>
         </div>
         <div className="h-full overflow-y-scroll p-4">
           {!seriesData ||
@@ -77,15 +83,16 @@ export default function DropdownSelections() {
       </div>
       <div className="flex md:h-[450px] md:w-1/2 flex-col z-20
         bg-gray-800 w-full h-96 rounded-br-xl">
-        <div className="flex bg-white text-2xl p-2 justify-end relative w-full
+        <div className="flex bg-white text-2xl px-2 relative w-full
           text-black border-2 border-white">
-          <div className='absolute w-4/5 h-full top-0 -left-2
-            bg-black rounded-xl'>
+          <div className='h-full mx-4
+            bg-black rounded-xl grow flex items-center'>
             <input
               placeholder="Search by serial..."
               onChange={productsHandle}
-              className='h-full w-full bg-black px-6
-              text-white text-md font-light'
+              className='h-full w-full bg-transparent px-6
+              text-white text-sm font-light rounded-xl
+              text-center'
             />
           </div>
           <span>Products</span>
