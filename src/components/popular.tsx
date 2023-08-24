@@ -3,14 +3,18 @@ import { LoadingSpinner } from "./loading";
 import Image from "next/image";
 import CheckDiscount from "./price";
 import { useUser } from "@clerk/nextjs";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 export default function PopularProducts() {
+  const [targetProd, setTargetProd] = useState("");
   const { isSignedIn } = useUser();
   const { data: popularProducts, isLoading: popProdLoading } =
     api.products.getPopular.useQuery();
   const ctx = api.useContext();
   const { mutate } = api.users.saveProduct.useMutation({
     onSuccess: () => {
+      toast.success(`Successfully added ${targetProd}`)
       void ctx.users.getUserList.invalidate();
     },
     onError: (e) => {
@@ -29,8 +33,8 @@ export default function PopularProducts() {
       console.error('ProductOptions()@index.tsx: id missing from product');
     }
     const target = e.target as HTMLInputElement;
-    const { value } = target; 
-    mutate({ productId: value });
+    setTargetProd(target.name); 
+    mutate({ productId: target.value });
   }
 
   return (
@@ -64,6 +68,7 @@ export default function PopularProducts() {
                   </>}
                 <button
                   className="bg-gray-800 w-24 h-10 rounded-full my-2"
+                  name={item.name}
                   value={item.id}
                   onClick={handler}>
                   Add to list

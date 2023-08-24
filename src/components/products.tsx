@@ -2,11 +2,15 @@ import { type Product } from "@prisma/client";
 import { api } from "~/utils/api"
 import Image from "next/image";
 import CheckDiscount from "./price";
+import { toast } from "react-hot-toast";
+import { useState } from "react";
 
 export default function ProductsOptions({ productsData }: { productsData: Product[] }) {
+  const [targetProd, setTargetProd] = useState("");
   const ctx = api.useContext();
   const { mutate } = api.users.saveProduct.useMutation({
     onSuccess: () => {
+      toast.success(`Successfully added ${targetProd}`)
       void ctx.users.getUserList.invalidate();
     },
     onError: (e) => {
@@ -25,8 +29,8 @@ export default function ProductsOptions({ productsData }: { productsData: Produc
       console.error('ProductOptions()@index.tsx: id missing from product');
     }
     const target = e.target as HTMLInputElement;
-    const { value } = target; 
-    mutate({ productId: value });
+    setTargetProd(target.name); 
+    mutate({ productId: target.value });
   }
 
   return (
@@ -81,6 +85,7 @@ export default function ProductsOptions({ productsData }: { productsData: Produc
               md:mx-14 md:my-0 md:top-44 rounded-full md:hover:bg-white
               md:hover:text-black transition ease-in-out bottom-0 h-6 w-32
               left-0 mx-2 my-2 border font-light"
+              name={res.name}
               value={res.id}
               onClick={handler}>
               Add to list

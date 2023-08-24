@@ -11,17 +11,17 @@ export default function DropdownSelections() {
   const { data: productsData, isLoading: productsLoading } =
     api.products.getFromSeries.useQuery({ seriesId: selectedSeries });
 
-  function seriesHandle(e: React.SyntheticEvent) {
-    e.preventDefault();
-    const seriesElements = document.getElementsByClassName('series_item') as HTMLCollectionOf<HTMLDivElement>;
-    const { value } = e.target as HTMLInputElement
+  function filterHandle(props: {e: React.SyntheticEvent, identifier: string}) {
+    props.e.preventDefault();
+    const elements = document.getElementsByClassName(props.identifier) as HTMLCollectionOf<HTMLDivElement>;
+    const { value } = props.e.target as HTMLInputElement
     if (!value) {
-      for (const el of seriesElements) {
+      for (const el of elements) {
         el.style.display = 'flex';
       }
     }
     if (value && value !== null) {
-      for (const el of seriesElements) {
+      for (const el of elements) {
         el.style.display = 'flex';
         if (!el.id.toLowerCase().includes(value.toLowerCase())) {
           el.style.display = 'none';
@@ -60,7 +60,7 @@ export default function DropdownSelections() {
             bg-black rounded-xl mx-4 flex items-center'>
             <input
               placeholder="Search by series..."
-              onChange={seriesHandle}
+              onChange={e => filterHandle({e: e, identifier: 'series_item'})}
               className='h-full w-full bg-transparent px-6
               text-white text-sm font-light rounded-xl
               text-center' />
@@ -88,10 +88,11 @@ export default function DropdownSelections() {
             bg-black rounded-xl grow flex items-center'>
             <input
               placeholder="Search by serial..."
-              onChange={productsHandle}
+              onChange={e => filterHandle({e: e, identifier: 'product_item'})}
               className='h-full w-full bg-transparent px-6
               text-white text-sm font-light rounded-xl
-              text-center' />
+              text-center'
+            />
           </div>
           <span>Products</span>
         </div>

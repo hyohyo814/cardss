@@ -3,14 +3,18 @@ import Image from "next/image";
 import { LoadingSpinner } from "./loading";
 import CheckDiscount from "./price";
 import { useUser } from "@clerk/nextjs";
+import { toast } from "react-hot-toast";
+import { useState } from "react";
 
 export default function Wishlist() {
+  const [targetProd, setTargetProd] = useState("");
   const { isSignedIn } = useUser();
   const { data: userWatchList, isLoading: watchListLoading } =
     api.users.getUserList.useQuery();
   const ctx = api.useContext();
   const { mutate, isLoading } = api.users.removeProduct.useMutation({
     onSuccess: () => {
+      toast.success(`Successfully removed ${targetProd}`);
       void ctx.users.getUserList.invalidate();
     },
     onError: (e) => {
@@ -26,9 +30,11 @@ export default function Wishlist() {
   function handler(e: React.SyntheticEvent) {
     e.preventDefault();
     if (!e.target) {
+      toast.error('Product does not exist!');
       console.error('ProductOptions()@index.tsx: id missing from product');
     }
     const target = e.target as HTMLInputElement;
+    setTargetProd(target.name);
     mutate({ productId: target.value });
   }
 
@@ -73,6 +79,7 @@ export default function Wishlist() {
                   <button
                     className="bg-rose-500 w-24 h-10 rounded-full z-40 my-2"
                     value={item.id}
+                    name={item.name}
                     onClick={handler}>
                     Remove
                   </button>
