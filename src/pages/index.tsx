@@ -7,12 +7,10 @@ import AnimateDropdown from "~/components/dropselect";
 import PopularProducts from "~/components/popular";
 import Wishlist from "~/components/wishlist";
 import DropdownSelections from "~/components/selections";
-import { LoadingPage } from "~/components/loading";
+import { LoadingPage, LoadingSpinner } from "~/components/loading";
 
 const Home: NextPage = () => {
   const { user, isSignedIn, isLoaded: userLoaded } = useUser();
-
-  if (!userLoaded) return <LoadingPage />;
 
   return (
     <PageLayout>
