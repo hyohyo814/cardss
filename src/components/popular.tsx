@@ -39,7 +39,7 @@ export default function PopularProducts() {
         p-2 mb-6 md:h-16">
         <span>Most Popular</span>
       </h2>
-      <div className="flex flex-wrap overflow-y-auto md:overflow-hidden h-96 md:h-full justify-center">
+      <div className="flex flex-wrap overflow-y-auto md:overflow-hidden h-[540px] md:h-full justify-center">
         {!!popProdLoading && (
           <div className="flex w-full justify-center">
             <LoadingSpinner size={66}/>

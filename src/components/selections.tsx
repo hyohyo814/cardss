@@ -39,7 +39,7 @@ export default function DropdownSelections() {
         </div>
       </div>
       <div className="flex md:h-[450px] md:w-1/2 flex-col z-20
-        bg-gray-800 w-full h-56 rounded-br-xl">
+        bg-gray-800 w-full h-96 rounded-br-xl">
         <div className="flex bg-white text-2xl p-2 justify-end relative w-full
           text-black border-2 border-white">
           <div className='absolute w-1/2 h-full top-0 -left-2
