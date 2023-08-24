@@ -10,7 +10,7 @@ export default function SeriesOptions({
   return (
     <>
       {seriesData.map((res) => (
-        <div key={res.id} className="flex font-light">
+        <div key={res.id} id={res.title} className="font-light series_item flex" hidden={true}>
           <input
             className="peer hidden"
             id={res.id}
