@@ -7,10 +7,9 @@ import AnimateDropdown from "~/components/dropselect";
 import PopularProducts from "~/components/popular";
 import Wishlist from "~/components/wishlist";
 import DropdownSelections from "~/components/selections";
-import { LoadingPage, LoadingSpinner } from "~/components/loading";
 
 const Home: NextPage = () => {
-  const { user, isSignedIn, isLoaded: userLoaded } = useUser();
+  const { user, isSignedIn } = useUser();
 
   return (
     <PageLayout>
@@ -56,7 +55,7 @@ const Home: NextPage = () => {
           </div>
         </div>
         {!isSignedIn &&
-          <div className="w-full absolute md:bottom-60 bottom-10 justify-center flex mt-6">
+          <div className="w-full justify-center flex my-6">
             <SignInButton>
               <button className="flex md:text-4xl md:w-1/2 justify-center
                 h-36 rounded-xl items-center bg-slate-950/80 border cursor-pointer
