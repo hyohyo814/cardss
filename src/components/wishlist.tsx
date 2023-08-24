@@ -26,6 +26,21 @@ export default function Wishlist() {
       }
     },
   });
+  
+  function checkOne(e: React.SyntheticEvent) {
+    if (!e.target) {
+      toast.error("Product information unavailable!");
+      console.error('Wishlist()@wishlist.tsx: id missing from product');
+    }
+    const target = e.target as HTMLInputElement;
+    const checkboxes = document.getElementsByClassName("wishlistoption") as HTMLCollectionOf<HTMLInputElement>;
+    for (const checkbox of checkboxes) {
+      if (checkbox.id !== target.id) {
+        checkbox.checked = false;
+      }
+    }
+    target.checked === true ? false : true
+  };
 
   function handler(e: React.SyntheticEvent) {
     e.preventDefault();
@@ -63,7 +78,8 @@ export default function Wishlist() {
               type="checkbox"
               name="wishlist"
               id={`wishlist/${item.id}`}
-              className="hidden absolute peer" />
+              onChange={checkOne}
+              className="wishlistoption hidden absolute peer" />
             <label htmlFor={`wishlist/${item.id}`} className="absolute md:hidden w-full h-full pr-4 z-30" />
             <div className="absolute left-8 flex invisible flex-col mt-6 items-center z-40
              md:group-hover:visible transition ease-in-out peer-checked:visible md:left-0 md:w-full">

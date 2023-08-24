@@ -26,12 +26,28 @@ export default function ProductsOptions({ productsData }: { productsData: Produc
   function handler(e: React.SyntheticEvent) {
     e.preventDefault();
     if (!e.target) {
-      console.error('ProductOptions()@index.tsx: id missing from product');
+      toast.error("Product information unavailable!");
+      console.error('ProductOptions()@products.tsx: id missing from product');
     }
     const target = e.target as HTMLInputElement;
     setTargetProd(target.name); 
     mutate({ productId: target.value });
-  }
+  };
+
+  function checkOne(e: React.SyntheticEvent) {
+    if (!e.target) {
+      toast.error("Product information unavailable!");
+      console.error('ProductOptions()@products.tsx: id missing from product');
+    }
+    const target = e.target as HTMLInputElement;
+    const checkboxes = document.getElementsByClassName("productsoption") as HTMLCollectionOf<HTMLInputElement>;
+    for (const checkbox of checkboxes) {
+      if (checkbox.id !== target.id) {
+        checkbox.checked = false;
+      }
+    }
+    target.checked === true ? false : true
+  };
 
   return (
     <>
@@ -44,15 +60,7 @@ export default function ProductsOptions({ productsData }: { productsData: Produc
             name="product"
             type="checkbox"
             value={res.id}
-            onChange={e => {
-              const checkboxes = document.getElementsByClassName("productsoption") as HTMLCollectionOf<HTMLInputElement>;
-              for (const checkbox of checkboxes) {
-                if (checkbox.id !== e.target.id) {
-                  checkbox.checked = false;
-                }
-              }
-              e.target.checked === true ? false : true
-            }} />
+            onChange={checkOne} />
           <label
             className="break-word w-full border-b
             border-gray-700 p-1
