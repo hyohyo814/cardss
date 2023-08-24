@@ -32,7 +32,8 @@ export default function ProductsOptions({ productsData }: { productsData: Produc
   return (
     <>
       {productsData.map((res) => (
-        <div key={res.id} id={res.name} className="product_item flex font-extralight relative flex-wrap w-full overflow-x-clip">
+        <div key={res.id} id={res.name} className="product_item flex font-extralight relative
+          flex-wrap w-full overflow-x-clip">
           <input
             className="productsoption peer hidden"
             id={res.id}

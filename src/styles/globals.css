@@ -10,7 +10,7 @@ body {
 
 /* scrollbar width */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 2px;
   
 }
 
