@@ -30,7 +30,8 @@ export default function PopularProducts() {
   function handler(e: React.SyntheticEvent) {
     e.preventDefault();
     if (!e.target) {
-      console.error('ProductOptions()@index.tsx: id missing from product');
+      toast.error('Product does not exist!');
+      console.error('handler()@PopularProducts.tsx: id missing from product');
     }
     const target = e.target as HTMLInputElement;
     setTargetProd(target.name); 
@@ -43,7 +44,7 @@ export default function PopularProducts() {
         p-2 mb-6 md:h-16">
         <span>Most Popular</span>
       </h2>
-      <div className="flex flex-wrap overflow-y-auto md:overflow-hidden h-[540px] md:h-full justify-center">
+      <div className="flex flex-wrap overflow-y-auto overflow-hidden h-[540px] lg:h-full justify-center">
         {!!popProdLoading && (
           <div className="flex w-full justify-center">
             <LoadingSpinner size={66}/>
