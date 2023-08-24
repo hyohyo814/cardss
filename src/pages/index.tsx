@@ -43,7 +43,8 @@ const Home: NextPage = () => {
              id="selections"
              className="absolute 2xl:top-[-420px] top-[-560px] z-10 flex w-full
              transition ease-in-out 2xl:peer-checked/selections-btn:translate-y-[500px]
-             peer-checked/selections-btn:translate-y-[620px] duration-500">
+             peer-checked/selections-btn:translate-y-[620px] duration-500
+             peer-checked/selections-btn:visible invisible">
               <DropdownSelections />
             </div>
           </>}
