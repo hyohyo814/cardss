@@ -69,45 +69,57 @@ export default function ProductsOptions({ productsData }: { productsData: Produc
             htmlFor={res.id}>
             {res.name}
           </label>
-          <div className="w-3/5 invisible h-64 backdrop-blur-sm md:peer-checked:translate-x-96
-            transition duration-500 md:-left-96 absolute md:top-8 my-2 rounded-r-xl
-            border-y border-r z-50 backdrop-brightness-50 md:-translate-x-20
-            peer-checked:visible delay1-150 ease-in-out shadow-2xl shadow-black
-            peer-checked:snap-center peer-checked:translate-x-64 -left-64">
+          <div
+            className="invisible absolute rounded-r-xl border-y border-r z-50
+            backdrop-brightness-50 backdrop-blur-sm shadow-2xl shadow-black
+            h-64 w-3/5 -left-64 my-2
+            md:top-8 md:-left-96 md:-translate-x-36
+            transition duration-500 ease-in-out delay-150
+            peer-checked:visible peer-checked:snap-center peer-checked:translate-x-64
+            2xl:peer-checked:translate-x-96">
             <div className="w-32 h-12 absolute top-1 right-1 flex justify-end">
               <label
-                className="flex md:h-12 md:w-12 md:bg-rose-500 cursor-pointer
-                items-center justify-center rounded-lg
-                md:before:content-['X'] md:hover:after:content-['Collapse']
-                md:hover:before:content-none transition duration-1000
-                md:hover:grow h-6 w-6 before:content-['\274C'] bg-transparent"
-                htmlFor={res.id} > 
-              </label>
+                className="items-center justify-center rounded-lg flex
+                bg-transparent transition duration-1000
+                md:hover:grow md:before:content-['X'] md:hover:after:content-['Collapse']
+                md:hover:before:content-none
+                h-6 w-6 cursor-pointer before:content-['\274C']
+                md:h-12 md:w-12 md:bg-rose-500"  
+                htmlFor={res.id} />
             </div>
-            <div className="flex justify-center absolute md:right-0 md:mx-12 md:bottom-24 md:w-32
-              bottom-8 mx-12">
+            <div className="flex justify-center absolute
+              md:right-0 md:mx-12 md:bottom-24 md:w-32
+              bottom-8 mx-12 w-24
+              xl:mx-12">
               <CheckDiscount priceStr={res.price} />
             </div>
             <button
-              className="md:h-12 md:w-32 bg-gray-800 absolute md:left-28
-              md:mx-14 md:my-0 md:top-44 rounded-full md:hover:bg-white
-              md:hover:text-black transition ease-in-out bottom-0 h-6 w-32
-              left-0 mx-2 my-2 border font-light"
+              className="flex justify-center items-center absolute rounded-full
+              transition ease-in-out border border-white
+              md:hover:text-black md:hover:bg-slate-50
+              bottom-2 mx-12 w-24
+              md:bottom-14 md:right-0 md:w-32 md:mx-12
+              lg:mx-12 
+              2xl:h-8 2xl:mx-12"
               name={res.name}
               value={res.id}
               onClick={handler}>
               Add to list
             </button> 
           </div>
-          <div className="h-0 md:top-8 md:-left-80 z-50 absolute invisible 
-            md:peer-checked:translate-x-80 peer-checked:visible transition duration-1000
-            ease-in-out delay-100 -left-36 peer-checked:translate-x-36 top-0">
+          <div
+            className="absolute invisible z-50
+            h-0 top-0 mx-6 -left-40
+            transition duration-1000 delay-100 ease-in-out
+            peer-checked:visible peer-checked:translate-x-40
+            md:top-8 md:-left-80
+            md:peer-checked:translate-x-80">
             <Image
               src={res.image === 'no-image' ? '/api/blankImage' : res.image}
               height={365}
               width={262}
               alt={`${res.name} image`}
-              className="rounded-xl md:w-[150px] md:h-[209px] mx-2 my-6
+              className="rounded-xl md:w-[150px] md:h-[209px] mx-2 my-8
               bg-slate-950/80 shadow-sm shadow-white w-32" />
           </div>
         </div>

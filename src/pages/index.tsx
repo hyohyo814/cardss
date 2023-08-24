@@ -31,7 +31,7 @@ const Home: NextPage = () => {
           )}
         </div>
       </div>
-      <div id="container" className="flex h-screen bg-black md:mx-60
+      <div id="container" className="flex h-screen bg-black xl:mx-60
       flex-wrap relative items-start">
         <div
          id="selections-container"
@@ -41,14 +41,14 @@ const Home: NextPage = () => {
             <AnimateDropdown />
             <div
              id="selections"
-             className="absolute md:top-[-420px] top-[-560px] z-10 flex w-full
-             transition ease-in-out md:peer-checked/selections-btn:translate-y-[500px]
+             className="absolute 2xl:top-[-420px] top-[-560px] z-10 flex w-full
+             transition ease-in-out 2xl:peer-checked/selections-btn:translate-y-[500px]
              peer-checked/selections-btn:translate-y-[620px] duration-500">
               <DropdownSelections />
             </div>
           </>}
-          <div className="md:top-16 z-10 w-full bg-black
-           md:peer-checked/selections-btn:translate-y-[480px] transition
+          <div className="2xl:top-16 z-10 w-full bg-black
+           2xl:peer-checked/selections-btn:translate-y-[480px] transition
            ease-in-out flex flex-wrap justify-center duration-500
            peer-checked/selections-btn:translate-y-[640px] p-2">
             <PopularProducts />
@@ -66,7 +66,7 @@ const Home: NextPage = () => {
             </SignInButton>
           </div>}
         {!!isSignedIn && <div className="flex flex-col z-20 w-full bg-black
-        p-2 absolute md:top-[550px] top-[700px]">
+        p-2 absolute 2xl:top-[550px] top-[700px]">
           <Wishlist />
         </div>}
       </div>

@@ -63,7 +63,7 @@ export default function Wishlist() {
         mb-6 p-2 md:h-16">
         <span>Wishlist</span>
       </h2>
-      <div className="md:grid-cols-5 grid-cols-2 grid h-[690px] overflow-x-hidden
+      <div className="lg:grid-cols-5 grid-cols-2 grid h-[690px] overflow-x-hidden
         overflow-y-scroll md:h-full">
         {!!watchListLoading && (
           <div className="flex w-full justify-center">

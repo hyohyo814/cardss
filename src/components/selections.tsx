@@ -30,28 +30,9 @@ export default function DropdownSelections() {
     }
   }
 
-  function productsHandle(e: React.SyntheticEvent) {
-    e.preventDefault();
-    const productsElements = document.getElementsByClassName('product_item') as HTMLCollectionOf<HTMLDivElement>;
-    const { value } = e.target as HTMLInputElement
-    if (!value) {
-      for (const el of productsElements) {
-        el.style.display = 'flex';
-      }
-    }
-    if (value && value !== null) {
-      for (const el of productsElements) {
-        el.style.display = 'flex';
-        if (!el.id.toLowerCase().includes(value.toLowerCase())) {
-          el.style.display = 'none';
-        }
-      }
-    }
-  }
-
   return (
     <div className="flex w-full flex-wrap">
-      <div className="flex md:h-[450px] md:w-1/2 flex-col
+      <div className="flex 2xl:h-[450px] 2xl:w-1/2 flex-col
        bg-gray-800 w-full h-56 md:rounded-bl-xl">
         <div className="flex bg-white text-black w-full text-2xl px-2
           border-2 border-white">
@@ -66,7 +47,7 @@ export default function DropdownSelections() {
               text-center' />
           </div>
         </div>
-        <div className="h-full overflow-y-scroll p-4">
+        <div className="h-full overflow-y-scroll 2xl:p-4">
           {!seriesData ||
             (!!seriesLoading && (
               <div className="flex items-center justify-center pt-[24px]">
@@ -80,7 +61,7 @@ export default function DropdownSelections() {
           )}
         </div>
       </div>
-      <div className="flex md:h-[450px] md:w-1/2 flex-col z-20
+      <div className="flex 2xl:h-[450px] 2xl:w-1/2 flex-col z-20
         bg-gray-800 w-full h-96 rounded-br-xl">
         <div className="flex bg-white text-2xl px-2 relative w-full
           text-black border-2 border-white">
@@ -96,7 +77,7 @@ export default function DropdownSelections() {
           </div>
           <span>Products</span>
         </div>
-        <div className="flex flex-col snap-y snap-mandatory overflow-y-scroll h-full w-full p-4">
+        <div className="flex flex-col snap-y snap-mandatory overflow-y-scroll h-full w-full 2xl:p-4">
           {!!productsLoading && (
             <div className="flex items-center justify-center pt-[24px]">
               <LoadingSpinner size={36} />
