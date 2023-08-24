@@ -35,22 +35,22 @@ const Home: NextPage = () => {
         </div>
       </div>
       <div id="container" className="flex h-screen bg-black md:mx-60
-      flex-wrap relative">
+      flex-wrap relative items-start">
         <div
          id="selections-container"
          className="relative flex w-full
          flex-wrap">
           {!!isSignedIn && <>
             <AnimateDropdown />
-          <div
-           id="selections"
-           className="absolute md:top-[-420px] top-[-560px] z-10 flex w-full
-           transition ease-in-out md:peer-checked/selections-btn:translate-y-[500px]
-           peer-checked/selections-btn:translate-y-[620px] duration-500">
-            <DropdownSelections />
-          </div>
+            <div
+             id="selections"
+             className="absolute md:top-[-420px] top-[-560px] z-10 flex w-full
+             transition ease-in-out md:peer-checked/selections-btn:translate-y-[500px]
+             peer-checked/selections-btn:translate-y-[620px] duration-500">
+              <DropdownSelections />
+            </div>
           </>}
-          <div className="absolute md:top-16 top-16 z-10 w-full bg-black
+          <div className="md:top-16 z-10 w-full bg-black
            md:peer-checked/selections-btn:translate-y-[480px] transition
            ease-in-out flex flex-wrap justify-center duration-500
            peer-checked/selections-btn:translate-y-[640px] p-2">
@@ -58,7 +58,7 @@ const Home: NextPage = () => {
           </div>
         </div>
         {!isSignedIn &&
-          <div className="w-full absolute md:bottom-60 bottom-40 justify-center flex mt-6">
+          <div className="w-full absolute md:bottom-60 bottom-10 justify-center flex mt-6">
             <SignInButton>
               <button className="flex md:text-4xl md:w-1/2 justify-center
                 h-36 rounded-xl items-center bg-slate-950/80 border cursor-pointer
