@@ -67,7 +67,7 @@ const Home: NextPage = () => {
             </SignInButton>
           </div>}
         {!!isSignedIn && <div className="flex flex-col z-20 w-full bg-black
-        p-2 absolute 2xl:top-[550px] top-[700px]">
+        p-2 absolute 2xl:top-[550px] top-[700px] md:h-[480px]">
           <Wishlist />
         </div>}
       </div>

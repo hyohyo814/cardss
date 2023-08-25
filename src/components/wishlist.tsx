@@ -64,7 +64,7 @@ export default function Wishlist() {
         <span>Wishlist</span>
       </h2>
       <div className="lg:grid-cols-5 grid-cols-2 grid h-[690px] overflow-x-hidden
-        overflow-y-scroll md:h-full overscroll-none no-scrollbar">
+        overflow-y-scroll md:h-full bg-black overscroll-none no-scrollbar">
         {!!watchListLoading && (
           <div className="flex w-full justify-center">
             <LoadingSpinner size={66}/>

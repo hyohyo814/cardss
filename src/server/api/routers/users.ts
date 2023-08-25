@@ -3,19 +3,17 @@ import { z } from "zod";
 import {
   createTRPCRouter,
   privateProcedure,
-  publicProcedure,
 } from "~/server/api/trpc";
 
 export const usersRouter = createTRPCRouter({
-  getAll: publicProcedure.query(async ({ ctx }) => {
+  getAll: privateProcedure.query(async ({ ctx }) => {
     return await ctx.prisma.user.findMany({});
   }),
 
   getUserList: privateProcedure.query(async ({ ctx }) => {
-    const { userId } = ctx;
     return await ctx.prisma.user.findFirst({
       where: {
-        userId: userId,
+        userId: ctx.userId,
       },
       select: {
         watchList: true
@@ -26,24 +24,22 @@ export const usersRouter = createTRPCRouter({
   saveProduct: privateProcedure
     .input(z.object({ productId: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      const { userId } = ctx;
-      const { productId } = input;
-    return await ctx.prisma.user.upsert({
+      return await ctx.prisma.user.upsert({
         where: {
-          userId: userId,
+          userId: ctx.userId,
         },
         update: {
           watchList: {
             connect: {
-              id: productId,
+              id: input.productId,
             },
           },
         },
         create: {
-          userId: userId,
+          userId: ctx.userId,
           watchList: {
             connect: {
-              id: productId,
+              id: input.productId,
             }
           }
         }
@@ -53,11 +49,9 @@ export const usersRouter = createTRPCRouter({
   removeProduct: privateProcedure
   .input(z.object({ productId: z.string() }))
   .mutation(async ({ ctx, input }) => {
-    const { userId } = ctx;
-    const { productId } = input;
     const userExists = await ctx.prisma.user.findFirst({
       where: {
-        userId: userId,
+        userId: ctx.userId,
       },
     });
 
@@ -67,12 +61,12 @@ export const usersRouter = createTRPCRouter({
 
     return await ctx.prisma.user.update({
       where: {
-        userId: userId,
+        userId: ctx.userId,
       },
       data: {
         watchList: {
           disconnect: {
-            id: productId,
+            id: input.productId,
           },
         },
       },
