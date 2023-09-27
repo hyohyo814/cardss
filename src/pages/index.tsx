@@ -3,7 +3,7 @@ import { type NextPage } from "next";
 import React from "react";
 import { PageLayout } from "~/components/layout";
 import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
-import AnimateDropdown from "~/components/dropselect"; 
+import AnimateDropdown from "~/components/dropselect";
 import PopularProducts from "~/components/popular";
 import Wishlist from "~/components/wishlist";
 import DropdownSelections from "~/components/selections";
@@ -34,14 +34,14 @@ const Home: NextPage = () => {
       <div id="container" className="flex h-screen bg-black xl:mx-60
       flex-wrap relative items-start">
         <div
-         id="selections-container"
-         className="relative flex w-full
+          id="selections-container"
+          className="relative flex w-full
          flex-wrap">
           {!!isSignedIn && <>
             <AnimateDropdown />
             <div
-             id="selections"
-             className="absolute 2xl:top-[-420px] top-[-560px] z-10 flex w-full
+              id="selections"
+              className="absolute 2xl:top-[-420px] top-[-560px] z-10 flex w-full
              transition ease-in-out 2xl:peer-checked/selections-btn:translate-y-[500px]
              peer-checked/selections-btn:translate-y-[620px] duration-500
              peer-checked/selections-btn:visible invisible">

@@ -13,7 +13,7 @@ export default {
     },
   },
   plugins: [
-    plugin(function ({ matchUtilities, theme }) {
+    plugin(function({ matchUtilities, theme }) {
       matchUtilities(
         {
           "text-shadow": (value) => ({

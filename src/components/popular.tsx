@@ -34,7 +34,7 @@ export default function PopularProducts() {
       console.error('handler()@PopularProducts.tsx: id missing from product');
     }
     const target = e.target as HTMLInputElement;
-    setTargetProd(target.name); 
+    setTargetProd(target.name);
     mutate({ productId: target.value });
   }
 
@@ -47,7 +47,7 @@ export default function PopularProducts() {
       <div className="flex flex-wrap overflow-y-auto overflow-hidden h-[540px] lg:h-full justify-center">
         {!!popProdLoading && (
           <div className="flex w-full justify-center">
-            <LoadingSpinner size={66}/>
+            <LoadingSpinner size={66} />
           </div>
         )}
         {!!popularProducts && popularProducts.map(item => (
@@ -81,7 +81,7 @@ export default function PopularProducts() {
                 width={262}
                 alt={`${item.name} image`}
                 className="rounded-xl md:w-[180px] md:h-[251px]
-                md:group-hover:blur z-10 transition peer-checked:blur" 
+                md:group-hover:blur z-10 transition peer-checked:blur"
               />
             </>}
             {!isSignedIn && <>

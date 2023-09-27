@@ -11,7 +11,7 @@ export default function DropdownSelections() {
   const { data: productsData, isLoading: productsLoading } =
     api.products.getFromSeries.useQuery({ seriesId: selectedSeries });
 
-  function filterHandle(props: {e: React.SyntheticEvent, identifier: string}) {
+  function filterHandle(props: { e: React.SyntheticEvent, identifier: string }) {
     props.e.preventDefault();
     const elements = document.getElementsByClassName(props.identifier) as HTMLCollectionOf<HTMLDivElement>;
     const { value } = props.e.target as HTMLInputElement
@@ -41,7 +41,7 @@ export default function DropdownSelections() {
             bg-black rounded-xl mx-4 flex items-center'>
             <input
               placeholder="Search by series..."
-              onChange={e => filterHandle({e: e, identifier: 'series_item'})}
+              onChange={e => filterHandle({ e: e, identifier: 'series_item' })}
               className='h-full w-full bg-transparent px-6
               text-white text-sm font-light rounded-xl
               text-center' />
@@ -53,7 +53,7 @@ export default function DropdownSelections() {
               <div className="flex items-center justify-center pt-[24px]">
                 <LoadingSpinner size={36} />
               </div>
-          ))}
+            ))}
           {seriesData && (
             <SeriesOptions
               seriesData={seriesData}
@@ -69,7 +69,7 @@ export default function DropdownSelections() {
             bg-black rounded-xl grow flex items-center'>
             <input
               placeholder="Search by serial..."
-              onChange={e => filterHandle({e: e, identifier: 'product_item'})}
+              onChange={e => filterHandle({ e: e, identifier: 'product_item' })}
               className='h-full w-full bg-transparent px-6
               text-white text-sm font-light rounded-xl
               text-center'

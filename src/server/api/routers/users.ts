@@ -45,33 +45,33 @@ export const usersRouter = createTRPCRouter({
         }
       });
     }),
-  
+
   removeProduct: privateProcedure
-  .input(z.object({ productId: z.string() }))
-  .mutation(async ({ ctx, input }) => {
-    const userExists = await ctx.prisma.user.findFirst({
-      where: {
-        userId: ctx.userId,
-      },
-    });
+    .input(z.object({ productId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const userExists = await ctx.prisma.user.findFirst({
+        where: {
+          userId: ctx.userId,
+        },
+      });
 
-    if (!userExists) {
-      throw new TRPCError({ code: 'UNAUTHORIZED' });
-    };
+      if (!userExists) {
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
+      };
 
-    return await ctx.prisma.user.update({
-      where: {
-        userId: ctx.userId,
-      },
-      data: {
-        watchList: {
-          disconnect: {
-            id: input.productId,
+      return await ctx.prisma.user.update({
+        where: {
+          userId: ctx.userId,
+        },
+        data: {
+          watchList: {
+            disconnect: {
+              id: input.productId,
+            },
           },
         },
-      },
-    });
-  }),
+      });
+    }),
 
-  
+
 });

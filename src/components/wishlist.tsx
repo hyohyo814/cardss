@@ -26,7 +26,7 @@ export default function Wishlist() {
       }
     },
   });
-  
+
   function checkOne(e: React.SyntheticEvent) {
     if (!e.target) {
       toast.error("Product information unavailable!");
@@ -64,10 +64,10 @@ export default function Wishlist() {
         <span>Wishlist</span>
       </h2>
       <div className="lg:grid-cols-5 grid-cols-2 grid h-[690px] overflow-x-hidden
-        overflow-y-scroll md:h-full bg-black overscroll-none no-scrollbar">
+        overflow-y-scroll md:h-full overscroll-none no-scrollbar">
         {!!watchListLoading && (
           <div className="flex w-full justify-center">
-            <LoadingSpinner size={66}/>
+            <LoadingSpinner size={66} />
           </div>
         )}
         {!!userWatchList && userWatchList?.watchList.map(item => (
@@ -86,10 +86,10 @@ export default function Wishlist() {
               {!isLoading && (
                 <>
                   {!!item.productLink &&
-                    <a 
+                    <a
                       className="bg-gray-800 w-24 h-10 rounded-full z-40 my-2
                       font-semibold flex justify-center items-center"
-                      href={item.productLink}>                    
+                      href={item.productLink}>
                       Go to link
                     </a>}
                   <button
@@ -102,7 +102,7 @@ export default function Wishlist() {
                 </>)}
               {!!isLoading && (
                 <div className="mt-6">
-                  <LoadingSpinner size={48}/>
+                  <LoadingSpinner size={48} />
                 </div>
               )}
             </div>
@@ -117,7 +117,7 @@ export default function Wishlist() {
               <span>{item.name}</span>
             </div>
             <div className="flex">
-              <CheckDiscount priceStr={item.price}/>
+              <CheckDiscount priceStr={item.price} />
             </div>
           </div>
         ))}
